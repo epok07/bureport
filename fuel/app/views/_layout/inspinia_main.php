@@ -11,10 +11,37 @@
     <?php echo Asset::css(array(
     	'bootstrap.min.css',
     	'font-awesome.css',
+
+        // C3 lib theme
+        'plugins/c3/c3.min.css',
     	'animate.css',
     	'style.css',
     )); ?>
 
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
+    <?php echo Asset::js(array(
+    //  Mainly scripts 
+      'jquery-3.1.1.min.js',
+    )); ?>
+
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('3607fe1af3ddf0c619ad', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('lhcm-channel');
+    channel.bind('prodreport', function(data) {
+      
+      console.log('PushNotification',data.message + ' '+data.name);
+      //alert(data.message);
+    });
+  </script>
      
 
 </head>
@@ -26,11 +53,16 @@
     <?= View::forge('_partials/navigation');?>
 
         <div id="page-wrapper" class="gray-bg">
+
+            
+
         <div class="row border-bottom">
             <?= View::forge('_partials/header_navigation');?>
         
         </div>
          <?= View::forge('_partials/page_header');?>
+
+          <?= View::forge('_partials/sidebar_right_msg');?>
 
          <div class="col-md-8">
 			<h1><?php echo $title; ?></h1>
@@ -56,7 +88,7 @@
 
             <div class="wrapper wrapper-content">
 
-            	<div class="wrapper wrapper-content animated fadeInRight">
+            	<div class="wrapper wrapper-content animated fadeInLeft">
 				    <div class="row">
 				        <div class="col-lg-12">
 
@@ -85,7 +117,7 @@
 
 	<?php echo Asset::js(array(
 	//  Mainly scripts 
-    	'jquery-3.1.1.min.js',
+    //	'jquery-3.1.1.min.js',
     	'bootstrap.min.js',
     	'plugins/metisMenu/jquery.metisMenu.js',
     	'plugins/slimscroll/jquery.slimscroll.min.js',
@@ -93,6 +125,9 @@
     	// Custom and plugin javascript
     	'inspinia.js',
     	'plugins/pace/pace.min.js',
+        'plugins/c3/c3.min.js',
+        'plugins/d3/d3.min.js'
+
     )); ?>
 
    

@@ -8,12 +8,61 @@
 
     <title><?php echo $title; ?></title>
 
-    <?php echo Asset::css(array(
-    	'bootstrap.min.css',
-    	'font-awesome.css',
-    	'animate.css',
-    	'style.css',
+     <?php echo Asset::css(array(
+        'bootstrap.min.css',
+        'font-awesome.css',
+        'plugins/toastr/toastr.min.css',
+
+
+        // C3 lib theme
+        'plugins/c3/c3.min.css',
+        'animate.css',
+        'style.css',
     )); ?>
+
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
+    <?php echo Asset::js(array(
+    //  Mainly scripts 
+      'jquery-3.1.1.min.js',
+      'plugins/toastr/toastr.min.js',
+    )); ?>
+
+<script>
+
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "progressBar": true,
+  "preventDuplicates": false,
+  "positionClass": "toast-top-right",
+  "onclick": null,
+  "showDuration": "400",
+  "hideDuration": "1000",
+  "timeOut": "7000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
+
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('3607fe1af3ddf0c619ad', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var channel = pusher.subscribe('lhcm-channel');
+    channel.bind('prodreport', function(data) {
+      
+      console.log('PushNotification',data.message + ' '+data.name);
+      //alert(data.message);
+    });
+  </script>
 
      
 
@@ -79,15 +128,18 @@
 
 
 	<?php echo Asset::js(array(
-	//  Mainly scripts 
-    	'jquery-3.1.1.min.js',
+	   //  Mainly scripts 
+    //  'jquery-3.1.1.min.js',
     	'bootstrap.min.js',
     	'plugins/metisMenu/jquery.metisMenu.js',
     	'plugins/slimscroll/jquery.slimscroll.min.js',
 
     	// Custom and plugin javascript
-    	'inspinia.js',
-    	'plugins/pace/pace.min.js',
+        'inspinia.js',
+        'plugins/pace/pace.min.js',
+        'plugins/c3/c3.min.js',
+        'plugins/d3/d3.min.js'
+
     )); ?>
 
    

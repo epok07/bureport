@@ -6,9 +6,25 @@ class Controller_Base extends Controller_Template
 
 	public $nav;
 
+	public $push_service;
+
 	public function before()
 	{
 		parent::before();
+
+		// Pusher config
+		$options = array(
+		    'cluster' => 'eu',
+		    'encrypted' => true
+		  );
+		$pusher = new \Pusher\Pusher(
+		    '3607fe1af3ddf0c619ad',
+		    'f6de443b98937cce6a49',
+		    '456184',
+		    $options
+		  );
+
+		$this->push_service = $pusher;
 
 		$this->current_user = null;
 
@@ -104,6 +120,7 @@ class Controller_Base extends Controller_Template
 		// Set a global variable so views can use it
 		View::set_global('current_user', $this->current_user);
 		View::set_global('nav', $this->nav);
+		View::set_global('push_service', $this->push_service);
 	}
 
 }

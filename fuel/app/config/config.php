@@ -48,13 +48,13 @@ return array(
 	/**
 	 * Default location for the file cache
 	 */
-	// 'cache_dir'       => APPPATH.'cache/',
+	 'cache_dir'       => APPPATH.'cache/',
 
 	/**
 	 * Settings for the file finder cache (the Cache class has it's own config!)
 	 */
-	// 'caching'         => false,
-	// 'cache_lifetime'  => 3600, // In Seconds
+	 'caching'         => false,
+	 'cache_lifetime'  => 3600, // In Seconds
 
 	/**
 	 * Callback to use with ob_start(), set this to 'ob_gzhandler' for gzip encoding of output
@@ -93,7 +93,7 @@ return array(
 	 * default_timezone		optional, if you want to change the server's default timezone
 	 */
 	// 'server_gmt_offset'  => 0,
-	// 'default_timezone'   => null,
+	 'default_timezone'   => 'Africa/Douala',
 
 	/**
 	 * Logging Threshold.  Can be set to any of the following:
@@ -182,6 +182,7 @@ return array(
 			'Fuel\\Core\\View',
 			'Fuel\\Core\\ViewModel',
 			'Closure',
+			'Pusher\\Pusher'
 		),
 	),
 
@@ -259,7 +260,7 @@ return array(
 	/**************************************************************************/
 	/* Always Load                                                            */
 	/**************************************************************************/
-	// 'always_load'  => array(
+	 'always_load'  => array(
 
 		/**
 		 * These packages are loaded on Fuel's startup.
@@ -272,9 +273,9 @@ return array(
 		 *     array('auth'	=> PKGPATH.'auth/')
 		 * );
 		 */
-		// 'packages'  => array(
-		// 	//'orm',
-		// ),
+		 'packages'  => array(
+		 	'orm','auth','email','parser'
+		 ),
 
 		/**
 		 * These modules are always loaded on Fuel's startup. You can specify them
@@ -310,6 +311,6 @@ return array(
 		 * If you don't want the lang in a group use null as groupname.
 		 */
 		// 'language'  => array(),
-	// ),
+	 ),
 
 );
