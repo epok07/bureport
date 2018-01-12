@@ -1,11 +1,11 @@
 
 
-<div class="sidebar-panel" style="min-height: 1252.9px;">
+        <div class="sidebar-panel" style="min-height: 1252.9px;">
                 <div>
                     <h4>Messages <span class="badge badge-info pull-right">16</span></h4>
                     <div class="feed-element">
                         <a href="#" class="pull-left">
-                            <img alt="image" class="img-circle" src="img/a1.jpg">
+                            <?= Asset::img("a1.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
                         </a>
                         <div class="media-body">
                             There are many variations of passages of Lorem Ipsum available.
@@ -15,7 +15,7 @@
                     </div>
                     <div class="feed-element">
                         <a href="#" class="pull-left">
-                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                            <?= Asset::img("a2.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
                         </a>
                         <div class="media-body">
                             TIt is a long established fact that.
@@ -25,7 +25,7 @@
                     </div>
                     <div class="feed-element">
                         <a href="#" class="pull-left">
-                            <img alt="image" class="img-circle" src="img/a3.jpg">
+                            <?= Asset::img("a3.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
                         </a>
                         <div class="media-body">
                             Many desktop publishing packages.
@@ -35,7 +35,7 @@
                     </div>
                     <div class="feed-element">
                         <a href="#" class="pull-left">
-                            <img alt="image" class="img-circle" src="img/a4.jpg">
+                            <?= Asset::img("a4.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
                         </a>
                         <div class="media-body">
                             The generated Lorem Ipsum is therefore always free.
