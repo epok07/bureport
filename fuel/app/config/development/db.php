@@ -6,9 +6,17 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_dev',
+			'dsn'        => 'mysql:host=localhost;dbname=lhbureportdb',
 			'username'   => 'root',
-			'password'   => 'root',
+			'password'   => 'mysql',
 		),
 	),
+
+	'redis' => array(
+        'reddb' => array(
+            'hostname'  => '127.0.0.1',
+            'port'      => 6379,
+            'timeout'	=> null,
+        )
+    ),
 );

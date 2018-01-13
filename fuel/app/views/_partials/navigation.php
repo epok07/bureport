@@ -15,7 +15,9 @@
                             <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li>
+                                <?= Html::anchor(URI::create('logout'),'logout',array("" => ''));?>
+                                </li>
                         </ul>
                     </div>
                     <div class="logo-element">
