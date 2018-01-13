@@ -8,6 +8,8 @@ class Controller_Base extends Controller_Template
 
 	public $push_service;	
 
+	public $current_employee;
+
 	public function before()
 	{
 		parent::before();
@@ -118,12 +120,26 @@ class Controller_Base extends Controller_Template
 			if (($id = $driver->get_user_id()) !== false)
 			{
 				$this->current_user = Model\Auth_User::find($id[1]);
+				$this->current_employee = Model_Employee::find('first', 
+					/////array( 
+						//"related" => array('employee', 
+					//////		array(
+					//////			"where" =>array(array("user_id", $id[1]))		
+					/////		)
+						//)
+					/////), 
+					array(
+						
+								"where" =>array(array("user_id", $id[1]))		
+							));
+
 			}
 			break;
 		}
 
 		// Set a global variable so views can use it
 		View::set_global('current_user', $this->current_user);
+		View::set_global('current_employee', $this->current_employee);
 		View::set_global('nav', $this->nav);
 		View::set_global('push_service', $this->push_service);
 	}

@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title><?php  echo "App Login"; ?></title>
+    <title><?php echo $title; ?></title>
 
     <?php echo Asset::css(array(
     	'bootstrap.min.css',
@@ -25,28 +25,39 @@
       'jquery-3.1.1.min.js',
     )); ?>
 
-<script>
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('3607fe1af3ddf0c619ad', {
-      cluster: 'eu',
-      encrypted: true
-    });
-
-    var channel = pusher.subscribe('lhcm-channel');
-    channel.bind('prodreport', function(data) {
-      
-      console.log('PushNotification',data.message + ' '+data.name);
-      //alert(data.message);
-    });
-  </script>
+ 
      
 
 </head>
-<body class="skin-1 fixed-navigation pace-done">
+<body class=" fixed-navigation pace-done" style="background: transparent;">
 
+    <?php if (Session::get_flash('success')  OR Session::get_flash('error')): ?>
+                <!-- <div class="wrapper"> -->
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1><?= $title; ?></h1>
+                            <hr>
+                        <?php if (Session::get_flash('success')): ?>
+                            <div class="alert alert-success">
+                                <strong>Success</strong>
+                                <p>
+                                <?php echo implode('</p><p>', e((array) Session::get_flash('success'))); ?>
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (Session::get_flash('error')): ?>
+                            <div class="alert alert-danger">
+                                <strong>Error</strong>
+                                <p>
+                                <?php echo implode('</p><p>', e((array) Session::get_flash('error'))); ?>
+                                </p>
+                            </div>
+                        <?php endif; ?>
+                        </div>
+
+                    </div>
+                <!-- </div>-->
+                <?php endif; ?>
 
 	 
 

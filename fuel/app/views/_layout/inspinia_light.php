@@ -45,19 +45,19 @@
      
 
 </head>
-<body class="skin-1 fixed-navigation pace-done">
+<body class="gray-bg">
 
 
 	 
 
-	<div class="middle-box text-center loginscreen animated fadeInDown">
+	<div class="middle-box text-center loginscreen* animated fadeInDown">
         <div>
             <div>
 
-                <h1 class="logo-name">IN+</h1>
+                <h1 class="logo-name">LH\cm</h1>
 
             </div>
-            <h3>Welcome to CIMENCAM Production Report+</h3>
+            <h3>CIMENCAM Production Report+</h3>
             <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>

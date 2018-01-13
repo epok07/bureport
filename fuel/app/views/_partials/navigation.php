@@ -8,7 +8,10 @@
 
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">Franck Elombat</strong>
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">
+                                 
+                                <?= "$current_employee->first_name $current_employee->last_name" ?>
+                            </strong>
                              </span> <span class="text-muted text-xs block">CTO <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>

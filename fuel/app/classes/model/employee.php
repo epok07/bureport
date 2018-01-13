@@ -32,6 +32,23 @@ class Model_Employee extends \Orm\Model_Soft
 
 		);
 
+	public static function validate($factory)
+	{
+		$val = Validation::forge($factory);
+		$val->add_field('first_name', 'Firstname', 'required|max_length[255]');
+		$val->add_field('last_name', 'Lastname', 'required|max_length[255]');
+		$val->add_field('email', 'Email', 'required|valid_email|max_length[255]');
+		$val->add_field('user_id', 'User Id', 'required|numeric');
+		$val->add_field('role_id', 'Role id', 'required|numeric');
+		$val->add_field('address1', 'Address 1', 'required|max_length[255]');
+		$val->add_field('jobtile_id', 'Job title', 'required|numeric');
+		
+
+
+		return $val;
+	}
+
+
 	protected static $_observers = array(
 		'Orm\Observer_CreatedAt' => array(
 			'events' => array('before_insert'),

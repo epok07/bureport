@@ -67,7 +67,7 @@ toastr.options = {
      
 
 </head>
-<body>
+<body class="skin-1 fixed-navigation pace-done">
 	 
 
 	 <div id="wrapper">

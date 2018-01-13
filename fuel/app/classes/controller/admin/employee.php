@@ -1,6 +1,7 @@
 <?php
 class Controller_Admin_Employee extends Controller_Admin
 {
+	public $template = '_layout/inspinia_main';
 
 	public function action_index()
 	{

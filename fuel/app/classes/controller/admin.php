@@ -54,7 +54,7 @@ class Controller_Admin extends Controller_Common
 								// credentials ok, go right in
 								$current_user = Model\Auth_User::find($id[1]);
 								Session::set_flash('success', e('Welcome, '.$current_user->username));
-								Response::redirect('admin');
+								Response::redirect('/');
 							}
 						}
 					}

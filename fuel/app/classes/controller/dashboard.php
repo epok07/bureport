@@ -1,8 +1,8 @@
 <?php
 
-class Controller_Dashboard extends Controller_Base
+class Controller_Dashboard extends Controller_Admin
 {
-	public $template = "_layout/inspinia_dash"; 
+	public $template = "_layout/inspinia_dash2"; 
 
 	public function action_index()
 	{
