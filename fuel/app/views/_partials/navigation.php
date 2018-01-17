@@ -9,8 +9,9 @@
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">
-                                 
+                                 <?php if(isset($current_employee) AND !empty($current_employee)) : ?>
                                 <?= "$current_employee->first_name $current_employee->last_name" ?>
+                                  <?php endif; ?>
                             </strong>
                              </span> <span class="text-muted text-xs block">CTO <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">

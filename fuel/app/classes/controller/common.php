@@ -48,7 +48,7 @@ class Controller_Common extends Controller_Template
 				'icon' => 'fa-th-large',
 				'submenu' => []
 				),
-			array(
+		/*	array(
 			'title' => "exams",
 				'url'	=> 'exams',
 				'attrs' => '',
@@ -97,7 +97,7 @@ class Controller_Common extends Controller_Template
 				'icon' => 'fa-bar-chart-o',
 				'submenu' => []
 				),
-			array(
+		*/	array(
 			'title' => "settings",
 				'url'	=> 'settings',
 				'attrs' => '',

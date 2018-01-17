@@ -48,7 +48,7 @@ class Controller_Base extends Controller_Template
 				'icon' => 'fa-th-large',
 				'submenu' => []
 				),
-			array(
+	/*		array(
 			'title' => "exams",
 				'url'	=> 'exams',
 				'attrs' => '',
@@ -97,8 +97,8 @@ class Controller_Base extends Controller_Template
 				'icon' => 'fa-bar-chart-o',
 				'submenu' => []
 				),
-			array(
-			'title' => "settings",
+	 */		array(
+	     	'title' => "settings",
 				'url'	=> 'settings',
 				'attrs' => '',
 				'icon' => 'fa-gear',
