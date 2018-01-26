@@ -61,11 +61,13 @@ class Controller_Admin extends Controller_Common
 					else
 					{
 						$this->template->set_global('login_error', 'Login failed!');
+						Session::set_flash('error', e('Login failed!'));
 					}
 				}
 				else
 				{
 					$this->template->set_global('login_error', 'Already logged in!');
+					Session::set_flash('error', e('Already logged in!'));
 				}
 			}
 		}

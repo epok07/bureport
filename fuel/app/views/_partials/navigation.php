@@ -3,8 +3,11 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            
-                            <?= Asset::img("profile_franck.png", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>64, 'width'=>64]);?>
+                            <?php if(isset($current_employee) AND !empty($current_employee->avatar_file)) : ?>
+                            <?= Asset::img("$current_employee->avatar_file", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>64, 'width'=>64]);?>
+                             <?php else: ?>
+                              <?= Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>64, 'width'=>64]);?>
+                            <?php endif; ?>
 
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -13,7 +16,7 @@
                                 <?= "$current_employee->first_name $current_employee->last_name" ?>
                                   <?php endif; ?>
                             </strong>
-                             </span> <span class="text-muted text-xs block">CTO <b class="caret"></b></span> </span> </a>
+                             </span> <span class="text-muted text-xs block"><?=  $current_employee->jobtitle->title; ?> <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li><a href="contacts.html">Contacts</a></li>

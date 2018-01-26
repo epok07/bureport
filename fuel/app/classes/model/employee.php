@@ -27,10 +27,20 @@ class Model_Employee extends \Orm\Model_Soft
 		        'key_to' => 'id',
 		        'cascade_save' => true,
 		        'cascade_delete' => false,
-		    ),  
+		    ), 
+
+		"jobtitle" =>  array(
+		        'key_from' => 'jobtile_id',
+		        'model_to' => 'Model_Jobtitle',
+		        'key_to' => 'id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),     
 
 
 		);
+
+
 
 	public static function validate($factory)
 	{

@@ -8,9 +8,11 @@
 return array(
 	'default' => array(
 		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_test',
-			'username'   => 'fuel_app',
-			'password'   => 'super_secret_password',
+			'dsn'        => 'mysql:host=litelecsqlserver.database.windows.net;dbname=lhbureportdb',
+			'username'   => 'phpappuser@litelecsqlserver',
+			'password'   => 'MySQL@zure2018$',
+			'sslmode' => FALSE,
 		),
 	),
 );
+

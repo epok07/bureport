@@ -2,7 +2,8 @@
 
 class Controller_Settings extends Controller_Admin
 {
-	public $template = "_layout/inspinia";
+	//public $template = "_layout/inspinia";
+	public $template = "_layout/inspinia_dash2";
 
 	public function action_index()
 	{
@@ -56,6 +57,14 @@ class Controller_Settings extends Controller_Admin
 	public function action_users()
 	{
 		$data["subnav"] = array('users'=> 'active' );
+
+		$data['jobtitles'] = Model_Jobtitle::find('all');
+		$data['users'] = Model_User::find('all');
+		$data['employees'] = Model_Employee::find('all');
+
+		//$this->template->title = "Jobtitles";
+		//$this->template->content = View::forge('jobtitle/index', $data);
+
 		$this->template->title = 'Settings &raquo; Users';
 		$this->template->content = View::forge('settings/users', $data);
 	}

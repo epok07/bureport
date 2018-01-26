@@ -9,7 +9,7 @@
 						<li class='<?php echo Arr::get($subnav, "year" ); ?>'><?php echo Html::anchor('dashboard/year','Year');?></li>
 
 					</ul>
-					<p>Index</p>
+					
 				</div> 
 			</div> 
 

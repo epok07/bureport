@@ -106,7 +106,7 @@ return array(
 	 * Set to true to prevent an exception from being throw when a file is not found.
 	 * The asset will then be skipped.
 	 */
-	'fail_silently' => false,
+	'fail_silently' => true,
 
 	/**
 	 * When set to true, the Asset class will always true to resolve an asset URI

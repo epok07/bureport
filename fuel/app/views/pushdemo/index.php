@@ -1,12 +1,23 @@
+<script>
+	// Popup window code
+function newPopup(url) {
+	popupWindow = window.open(
+		url,'popUpWindow','height=300,width=400,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+}
+ 
+</script>
 
 <div class="row">
 <ul class="nav nav-pills">
 	<li class='<?php echo Arr::get($subnav, "index" ); ?>'><?php echo Html::anchor('pushdemo/index','Index');?></li>
-	<li class='<?php echo Arr::get($subnav, "demo" ); ?>'><?php echo Html::anchor('pushdemo/demo','Demo');?></li>
+	<!-- <li class='<?php echo Arr::get($subnav, "demo" ); ?>'><?php // echo Html::anchor('pushdemo/demo','Demo', array("id"=> 'demourl',"target"=> '_parent'));?></li> -->
+    <li class='<?php echo Arr::get($subnav, "demo" ); ?>'><a href="JavaScript:newPopup('<?php echo URI::create('pushdemo/demo') ?>');">Click Here to emulate a notification</a> </li>
 
 </ul>
 <p>Index</p>
 </div>
+
+
 
 <div class="row">
                 <div class="col-lg-4">
@@ -25,7 +36,7 @@
                 <div class="col-lg-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Sillo #1 Example</h5>
+                            <h5>Sillo #2 Example</h5>
                         </div>
                         <div class="ibox-content">
                             <div>
@@ -51,7 +62,8 @@
 
 
 <script >
-
+ 
+   
 
 (function(){
 
@@ -233,6 +245,30 @@
             });
 
         });
+
+// 
+ var _demouri = $('#demourl').attr("href");
+    document.getElementById("demolink").addEventListener("click", openNewBackgroundTab, false);
+
+    var myActionBtn = $('#demourl');
+
+    myActionBtn.on('click', function(evt){
+        evt.preventDefault();
+        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+    });
+
+
+function openNewBackgroundTab(){
+    var a = document.createElement("a");
+    a.href = _demouri;
+    var evt = document.createEvent("MouseEvents");    
+    evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+    a.dispatchEvent(evt);
+}
+ 
+
+ 
+
 
 })();
 

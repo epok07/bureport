@@ -34,8 +34,8 @@
     <?php if (Session::get_flash('success')  OR Session::get_flash('error')): ?>
                 <!-- <div class="wrapper"> -->
                     <div class="row">
-                        <div class="col-md-8">
-                            <h1><?= $title; ?></h1>
+                        <div class="col-md-3 col-md-offset-4">
+                            
                             <hr>
                         <?php if (Session::get_flash('success')): ?>
                             <div class="alert alert-success">
