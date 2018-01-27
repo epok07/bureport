@@ -26,6 +26,12 @@ define('DOCROOT', __DIR__.DIRECTORY_SEPARATOR);
  */
 define('APPPATH', realpath(__DIR__.'/../fuel/app/').DIRECTORY_SEPARATOR);
 
+
+/**
+ * Path to the vendor directory.
+ */
+define('VENDORPATH', realpath(__DIR__.'/../fuel/vendor/').DIRECTORY_SEPARATOR);
+
 /**
  * Path to the default packages directory.
  */

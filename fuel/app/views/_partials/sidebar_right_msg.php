@@ -1,4 +1,7 @@
-
+<?php 
+use Carbon\Carbon;
+Carbon::setLocale('en');
+?>
 
         <div class="sidebar-panel" style="min-height: 1252.9px;">
                 <div>
@@ -10,7 +13,9 @@
                         <div class="media-body">
                             There are many variations of passages of Lorem Ipsum available.
                             <br>
-                            <small class="text-muted">Today 4:21 pm</small>
+                            <small class="text-muted">Today 4:21 pm
+                                <?= Carbon::now()->subMinutes(13)->diffForHumans();?>
+                            </small>
                         </div>
                     </div>
                     <div class="feed-element">
@@ -20,7 +25,14 @@
                         <div class="media-body">
                             TIt is a long established fact that.
                             <br>
-                            <small class="text-muted">Yesterday 2:45 pm</small>
+                            <small class="text-muted"> <!-- Yesterday 2:45 pm -->  <?php 
+                            $dt = Carbon::create(2018, 1, 25, 14, 15, 16);
+ 
+                           echo $dt->toDayDateTimeString(); 
+                           echo "<br>" .  $dt->diffForHumans(); ;
+                           ?>
+                               
+                           </small>
                         </div>
                     </div>
                     <div class="feed-element">

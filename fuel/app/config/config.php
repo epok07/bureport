@@ -182,7 +182,8 @@ return array(
 			'Fuel\\Core\\View',
 			'Fuel\\Core\\ViewModel',
 			'Closure',
-			'Pusher\\Pusher'
+			'Pusher\\Pusher',
+			'Carbon\\Carbon',
 		),
 	),
 
