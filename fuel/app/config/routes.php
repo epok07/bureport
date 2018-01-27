@@ -10,4 +10,14 @@ return array(
 
 	
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
+
+
+	'message/delete(/:id)?' => array('message/delete', 'id' => 0),
+	'message/view(/:id)?' => array('message/view', 'id' => 0),
+
+
+	
+
+
+
 );

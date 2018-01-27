@@ -21,6 +21,9 @@ class Controller_Message extends Controller_Admin
 			Response::redirect('message');
 		}
 
+		// get the list of named parameters
+		$params = Request::active();
+		Debug::dump($params->method_params[0]);
 		$this->template->title = "Message";
 		$this->template->content = View::forge('message/view', $data)->auto_filter(false);
 
@@ -47,7 +50,12 @@ class Controller_Message extends Controller_Admin
 
 				if ($message and $message->save())
 				{
+					$data  = array("message" => $message->subject);
 					Session::set_flash('success', 'Added message #'.$message->id.'.');
+					$pusher = $this->push_service->trigger('lhcm-channel', 'prodreport', $data);
+
+		  			Session::set_flash('info', $data);
+		  			Cookie::set('data_message', $message->subject , 60 * 5 );
 
 					Response::redirect('message');
 				}

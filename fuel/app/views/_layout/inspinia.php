@@ -99,6 +99,11 @@ toastr.options = {
 				<?php echo implode('</p><p>', e((array) Session::get_flash('success'))); ?>
 				</p>
 			</div>
+      <script>
+        // Notice 
+        // Display a info toast, with a title
+          toastr.info('Notice:',"<?php echo implode('</p><p>', e((array) Session::get_flash('success'))); ?>");
+      </script>
 		<?php endif; ?>
 		<?php if (Session::get_flash('error')): ?>
 			<div class="alert alert-danger">

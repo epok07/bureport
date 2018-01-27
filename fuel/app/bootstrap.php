@@ -6,6 +6,14 @@ require COREPATH.'bootstrap.php';
 	// Add classes you want to override here
 	// Example: 'View' => APPPATH.'classes/view.php',
 
+	//'Observer_Request' => APPPATH .'classes/observer/request.php',
+	'Orm\\Observer_Message' => APPPATH .'classes/observer/message.php',
+
+    //    'Orm\\Observer_Account' => APPPATH .'classes/observer/account.php',
+
+        'Validation' => APPPATH.'classes/validation/validation.php',
+        'parseCSV' => APPPATH.'vendor/parsecsv/php-parsecsv/parsecsv.lib.php',
+
 ));
 
 // Register the autoloader

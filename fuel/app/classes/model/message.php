@@ -26,6 +26,10 @@ class Model_Message extends Model
 			'events' => array('before_save'),
 			'mysql_timestamp' => false,
 		),
+		'Orm\Observer_Message' => array(
+       	    'events' => array('after_insert','after_delete'),
+       	     'mysql_timestamp' => false,
+       	 ),
 	);
 
 	protected static $_belongs_to = array(

@@ -12,7 +12,7 @@
 
             <div class="col-lg-9 animated fadeInRight">
 
-            <?php //echo render('message/_form'); ?>
+            	<?php //echo render('message/_form'); ?>
 
              <?php echo render('message/_form_message'); ?>
 

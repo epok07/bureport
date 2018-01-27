@@ -9,7 +9,8 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($jobtitles as $item): ?>		<tr>
+<?php foreach ($jobtitles as $item): ?>		
+		<tr>
 
 			<td><?php echo $item->title; ?></td>
 			<td>
@@ -20,13 +21,15 @@
 
 			</td>
 		</tr>
-<?php endforeach; ?>	</tbody>
+<?php endforeach; ?>	
+	</tbody>
 </table>
 
 <?php else: ?>
 <p>No Jobtitles.</p>
 
-<?php endif; ?><p>
+<?php endif; ?>
+<p>
 	<?php echo Html::anchor('jobtitle/create', 'Add new Jobtitle', array('class' => 'btn btn-success')); ?>
 
 </p>
