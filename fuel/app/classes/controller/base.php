@@ -1,5 +1,8 @@
 <?php
 
+use Carbon\Carbon;
+
+
 class Controller_Base extends Controller_Template
 {
 	public $template = "_layout/inspinia_main";
@@ -109,9 +112,6 @@ class Controller_Base extends Controller_Template
 
 		$this->nav = $nav;
 
-
-		
-
 		$this->current_session->set("returning_visitor", Session::get("returning_visitor"));
 
 
@@ -142,6 +142,28 @@ class Controller_Base extends Controller_Template
 		View::set_global('current_employee', $this->current_employee);
 		View::set_global('nav', $this->nav);
 		View::set_global('push_service', $this->push_service);
+	}
+
+
+	public function glob_recursive($directory, &$directories = array()) {
+	        foreach(glob($directory, GLOB_ONLYDIR | GLOB_NOSORT) as $folder) {
+	            $directories[] = $folder;
+	            $this->glob_recursive("{$folder}/*", $directories);
+	        }
+	}
+
+	public function findFiles($directory, $extensions = array()) {
+	   
+	    $this->glob_recursive($directory, $directories);
+	    $files = array ();
+	    foreach($directories as $directory) {
+	        foreach($extensions as $extension) {
+	            foreach(glob("{$directory}/*.{$extension}") as $file) {
+	                $files[$extension][] = $file;
+	            }
+	        }
+	    }
+	    return $files;
 	}
 
 }

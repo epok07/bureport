@@ -1,8 +1,9 @@
 <?php
+use Carbon\Carbon;
 
 class Controller_Admin extends Controller_Common
 {
-	//public $template = 'admin/template';
+	public $template = '_layout/inspinia_login';
 
 	public function before()
 	{
@@ -96,8 +97,11 @@ class Controller_Admin extends Controller_Common
 	 */
 	public function action_index()
 	{
+
 		$this->template->title = 'Dashboard';
 		$this->template->content = View::forge('admin/dashboard');
+
+
 	}
 
 }

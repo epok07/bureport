@@ -40,6 +40,23 @@ class Model_Employee extends \Orm\Model_Soft
 
 		);
 
+	protected static $_has_many = array(
+		"messages" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Message',
+		        'key_to' => 'form_user_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ), 
+		"mails" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Message',
+		        'key_to' => 'to_user_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ), 
+		);
+
 
 
 	public static function validate($factory)
@@ -75,5 +92,21 @@ class Model_Employee extends \Orm\Model_Soft
 	);
 
 	protected static $_table_name = 'employees';
+
+	public static function get_dropdownlist($exclude = array() ){
+		$dlist = []; 
+		$empty= ['-' => "Please select ..."];
+		$dlist['-']= "Please select ..."; 
+		$entry = Model_Employee::find('all', array('array(select)' => array( 'first_name', 'last_name')));
+		foreach ($entry as $key => $row) {
+				if(isset($exclude) && !in_array($row->id, $exclude)){
+
+					$dlist[$row->id] =  "$row->first_name $row->last_name" ;
+				}
+			}
+		
+		return $dlist;
+	}
+
 
 }

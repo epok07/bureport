@@ -12,6 +12,9 @@
     	'bootstrap.min.css',
     	'font-awesome.css',
 
+        // Messages
+        'plugins/iCheck/custom.css',
+
         // C3 lib theme
         'plugins/c3/c3.min.css',
     	'animate.css',
@@ -70,19 +73,9 @@
                 <?php echo $content; ?>
 
             </div>
-        <div class="footer">
-                    <div class="pull-right">
-                       <p class="pull-right">Page rendered in {exec_time}s using {mem_usage}mb of memory.</p>
-    					
-                    </div>
-                    <div>
-                        <strong>Copyright</strong> Astrio &copy; 2017-2018
-                        <small>
-                            <a href="http://fuelphp.com">FuelPHP</a> is released under the MIT license. :: 
-                            <small>Version: <?php echo e(Fuel::VERSION); ?></small>
-                        </small>
-                    </div>
-                </div>
+
+        
+                <?= View::forge('_partials/page_footer');?>
                 
                 <?= View::forge('_partials/sidebar_right_params');?>
     </div>
@@ -111,9 +104,20 @@
         'plugins/chartJs/Chart.min.js',
     	'plugins/pace/pace.min.js',
         'plugins/c3/c3.min.js',
-        'plugins/d3/d3.min.js'
+        'plugins/d3/d3.min.js',
+
+        'plugins/iCheck/icheck.min.js',
 
     )); ?>
+
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
 
     <script>
 

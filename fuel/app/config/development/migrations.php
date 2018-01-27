@@ -8,6 +8,12 @@ return array (
       array (
         0 => '001_create_employees',
         1 => '002_create_jobtitles',
+        2 => '003_create_activitylogs',
+        3 => '004_create_posts',
+        4 => '005_create_todos',
+        5 => '006_create_announcements',
+        6 => '007_create_settings',
+        7 => '008_create_messages',
       ),
     ),
     'module' => 

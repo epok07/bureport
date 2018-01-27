@@ -1,4 +1,5 @@
 <?php
+use Carbon\Carbon;
 
 class Controller_Common extends Controller_Template
 {
@@ -9,7 +10,9 @@ class Controller_Common extends Controller_Template
 	public $push_service;	
 
 	public $current_employee;
-	
+
+	public $directories = array();
+	 
 	public function before()
 	{
 		parent::before();
@@ -38,6 +41,35 @@ class Controller_Common extends Controller_Template
 		$session = Session::instance();
 
 		$this->current_session = $session;
+
+		// Navigation processing 
+ 
+		$endpoints = $this->findFiles('../fuel/app/classes/controller', ['php'], ['admin']);
+
+		$temp_nav_uri = array();
+		$iconset = array(
+			'fa-users', 
+			'fa-th-large', 
+			'fa-mail', 
+			'fa-star', 
+			'fa-file-o', 
+			'fa-gear', 
+			'fa-check', 
+			'fa-bar-chart-o', 
+			'fa-gear', 'fa-gear', 'fa-gear', 
+			);
+
+		foreach ($endpoints['php'] as $key => $nav_uri) {
+			$_curent_uri = str_replace('.php', '', $nav_uri);
+			$temp_nav_uri[] = array(
+				'title' => ucfirst($_curent_uri),
+				'url'	=> $_curent_uri,
+				'attrs' => '',
+				'icon' => $iconset[$key],
+				'submenu' => []
+					);
+		}
+ 
 		
 		// navigation
 		$nav = array(
@@ -107,7 +139,7 @@ class Controller_Common extends Controller_Template
 		); 
 
 
-		$this->nav = $nav;
+		$this->nav = $temp_nav_uri; //$nav;
 
 
 		
@@ -147,6 +179,47 @@ class Controller_Common extends Controller_Template
 		View::set_global('current_employee', $this->current_employee);
 		View::set_global('nav', $this->nav);
 		View::set_global('push_service', $this->push_service);
+	}
+
+	
+
+	public function glob_recursive($directory, $projectsListIgnore = array(),$recursive_flag = TRUE , &$directories = array() ) {
+	        foreach(glob($directory, GLOB_ONLYDIR | GLOB_NOSORT) as $folder) {
+	        	if ( !in_array($folder,$projectsListIgnore)) 
+				{
+		            $this->directories[] = $folder;
+		            if($recursive_flag) $this->glob_recursive("{$folder}/*", $this->directories);
+		        }
+		    }
+	}
+
+	public function findFiles($directory, $extensions = array(), $projectsListIgnore = array()) {
+	   $this->directories = array();
+	    $this->glob_recursive($directory, ['admin'], TRUE);
+	    $files = array ();
+		foreach($this->directories as $directory) {
+			//Debug::dump($directory); die();
+		   		if ( !in_array($directory,$projectsListIgnore)) 
+				{
+			        foreach($extensions as $extension) {
+			            foreach(glob("{$directory}/*.{$extension}") as $file) {
+			            	if (!preg_match('/test/', $file) 
+			            		AND !preg_match('/welcome/', $file)
+			            		AND !preg_match('/demo/', $file)
+			            		AND !preg_match('/base/', $file)
+			            		AND !preg_match('/demo/', $file)
+			            		AND !preg_match('/common/', $file)
+			            		AND !preg_match('/jobtitle/', $file)
+			            		) {
+			            	//Debug::dump($file); die();
+
+			                	$files[$extension][] = str_replace($directory."/", '', $file);
+			            	}
+			            }
+			        }
+		    	}
+		}
+	    return $files;
 	}
 
 }

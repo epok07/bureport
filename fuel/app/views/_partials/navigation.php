@@ -16,7 +16,7 @@
                                 <?= "$current_employee->first_name $current_employee->last_name" ?>
                                   <?php endif; ?>
                             </strong>
-                             </span> <span class="text-muted text-xs block"><?=  $current_employee->jobtitle->title; ?> <b class="caret"></b></span> </span> </a>
+                             </span> <span class="text-muted text-xs block"><?=  @$current_employee->jobtitle->title; ?> <b class="caret"></b></span> </span> </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a href="profile.html">Profile</a></li>
                             <li><a href="contacts.html">Contacts</a></li>
