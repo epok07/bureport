@@ -14,6 +14,7 @@ return array (
         5 => '006_create_announcements',
         6 => '007_create_settings',
         7 => '008_create_messages',
+        8 => '009_create_chats',
       ),
     ),
     'module' => 

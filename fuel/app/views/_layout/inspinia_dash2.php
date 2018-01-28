@@ -56,9 +56,9 @@
 	 
 
 	 <div class="pace  pace-inactive"><div class="pace-progress" style="transform: translate3d(100%, 0px, 0px);" data-progress-text="100%" data-progress="99">
-  <div class="pace-progress-inner"></div>
-</div>
-<div class="pace-activity"></div></div>
+            <div class="pace-progress-inner"></div>
+        </div>
+    <div class="pace-activity"></div></div>
     <div id="wrapper">
     <?= View::forge('_partials/navigation');?>
 
@@ -78,7 +78,8 @@
                 <?= View::forge('_partials/page_footer');?>
                 
                 <?= View::forge('_partials/sidebar_right_params');?>
-    </div>
+        </div>
+     <?= View::forge('_partials/widget_chat');?>
     </div>
 
     

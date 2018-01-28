@@ -55,6 +55,13 @@ class Model_Employee extends \Orm\Model_Soft
 		        'cascade_save' => true,
 		        'cascade_delete' => false,
 		    ), 
+		"chats" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Chat',
+		        'key_to' => 'from_user_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),
 		);
 
 
@@ -115,6 +122,43 @@ class Model_Employee extends \Orm\Model_Soft
 		
 		return $dlist;
 	}
+
+	public static function get_avatar($user_id = 0, $size = 64 ,$class = 'img-circle'){
+		$employee = Model_Employee::find($user_id);
+		list ($auth_driver, $current_user_id) = \Auth::get_user_id();
+		$_avatar = Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>$class, 'height'=>$size, 'width'=>$size]);;
+		if(isset($employee)  AND empty($employee->avatar_file)) 
+		{
+			return $_avatar = Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>$class, 'height'=>$size, 'width'=>$size, 'alt'=>'...', 'title'=> $employee->first_name .' '. $employee->last_name]);
+		}elseif(isset($employee) AND !empty($employee->avatar_file)) 
+		{
+			return $_avatar = Asset::img("$employee->avatar_file", ['alt'=>"image" ,'class'=>$class, 'height'=>$size, 'width'=>$size, 'alt'=>'...', 'title'=> $employee->first_name .' '. $employee->last_name]);
+		}else{
+			return $_avatar = Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>$class, 'height'=>$size, 'width'=>$size,'alt'=>'...', 'title'=>" #~.`# "]);
+		}
+
+		//return $_avatar;
+
+	}
+
+	public static function get_profile($user_id = 0, $size = 64, $class = 'img-circle' ){
+		$employee = Model_Employee::find($user_id);
+		list ($auth_driver, $current_user_id) = \Auth::get_user_id();
+		$_avatar = Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>$size, 'width'=>$size]);;
+		if(isset($employee)  AND empty($employee->avatar_file)) 
+		{
+			return $_avatar = Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>$size, 'width'=>$size, 'alt'=>'...', 'title'=> $employee->first_name .' '. $employee->last_name]);
+		}elseif(isset($employee) AND !empty($employee->avatar_file)) 
+		{
+			return $_avatar = Asset::img("$employee->avatar_file", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>$size, 'width'=>$size, 'alt'=>'...', 'title'=> $employee->first_name .' '. $employee->last_name]);
+		}else{
+			return $_avatar = Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>$size, 'width'=>$size,'alt'=>'...', 'title'=>" #~.`# "]);
+		}
+
+		//return $_avatar;
+
+	}
+	
 
 
 }

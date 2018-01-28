@@ -128,6 +128,8 @@ toastr.options = {
             <?= View::forge('_partials/page_footer');?>
 
         </div>
+
+         <?= View::forge('_partials/widget_chat');?>
         </div>
 
 

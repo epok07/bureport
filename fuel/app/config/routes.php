@@ -13,6 +13,8 @@ return array(
 
 
 	'message/delete(/:id)?' => array('message/delete', 'id' => 0),
+	//'chat/delete(/:id)?' => array('chat/delete', 'id' => 0),
+
 	'message/view(/:id)?' => array('message/view', 'id' => 0),
 
 

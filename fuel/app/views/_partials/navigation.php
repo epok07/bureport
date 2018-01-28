@@ -3,11 +3,7 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element"> <span>
-                            <?php if(isset($current_employee) AND !empty($current_employee->avatar_file)) : ?>
-                            <?= Asset::img("$current_employee->avatar_file", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>64, 'width'=>64]);?>
-                             <?php else: ?>
-                              <?= Asset::img("avatar.jpg", ['alt'=>"image" ,'class'=>"img-circle", 'height'=>64, 'width'=>64]);?>
-                            <?php endif; ?>
+                            <?= Model_Employee::get_avatar($current_employee->id, 64); ?>
 
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
