@@ -58,10 +58,8 @@ Carbon::setLocale('fr');
             <div class="col-lg-6">
                 <div class="ibox-content">
                     <h2>TODO List</h2>
-                    <div class="search-form">
-                    <?php $action_uri = Uri::create('todo/add'); echo Form::open(array("class"=>"form-horizontal ajax-callable", 'method'=>'post', 'action'=>" $action_uri ")); ?>
-
-                                
+                    <div class="todo-form">
+                    <?php $action_uri = Uri::create('todo/add'); echo Form::open(array("id"=>'todo-icheck-version',"class"=>"form-horizontal ajax-callable", 'method'=>'post', 'action'=>" $action_uri ")); ?>
                                     <div class="input-group">
                                         <input placeholder="Getting things done ..." name="title" class="form-control input-lg" type="text">
                                         <div class="input-group-btn">
@@ -92,10 +90,10 @@ Carbon::setLocale('fr');
                 <div class="ibox float-e-margins">
                     <div class="ibox-content">
                         <h2>TODO Small version</h2>
-                        <div class="search-form">
-                                <form action="" method="get">
+                        <div class="todo-form">
+                                <?php $action_uri = Uri::create('todo/add'); echo Form::open(array("id"=>'todo-small-version',"class"=>"form-horizontal ajax-callable", 'method'=>'post', 'action'=>" $action_uri ")); ?>
                                     <div class="input-group">
-                                        <input placeholder="Getting things done ..." name="search" class="form-control input-lg" type="text">
+                                        <input placeholder="Getting things done ..." name="title" class="form-control input-lg" type="text">
                                         <div class="input-group-btn">
                                             <button class="btn btn-lg btn-primary" type="submit">
                                                 Add a ToDo
@@ -103,15 +101,15 @@ Carbon::setLocale('fr');
                                         </div>
                                     </div>
 
-                                </form>
+                                <?php echo Form::close(); ?>
                             </div>
                             <div class="hr-line-dashed"></div>
                         <small>This is example of small version of todo list</small>
                         <ul class="todo-list m-t small-list ui-sortable">
                         <?php foreach ($todos as $item): ?>
                             <li>
-                                <a class="check-link" href="#"><i class="fa fa-check-square"></i> </a>
-                                <span class="m-l-xs <?= ($item->status == 'done') ? "todo-completed": '' ; ?> "><?= $item->title; ?></span>
+                                <a class="check-link" href="#"><?= ($item->status == 'done') ? '<i class="fa fa-check-square"></i>': '<i class="fa fa-square-o"></i>' ; ?> </a>
+                                <span class="m-l-xs <?= ($item->status == 'done') ? "todo-completed": ' ' ; ?> "><?= $item->title; ?></span>
 								<small class="label label-primary"><i class="fa fa-clock-o"></i>  <?= Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->diffForHumans() ; ?>
 								</small>
 

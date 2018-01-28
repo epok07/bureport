@@ -7,7 +7,11 @@ class Controller_Todo extends Controller_Admin
 
 	public function action_index()
 	{
-		$data['todos'] = Model_Todo::find('all');
+		$data['todos'] = Model_Todo::find('all', array(
+				'where' => array(
+					 array('created_by' => $this->current_user->id ),
+				)
+			));
 		$this->template->title = "Todos";
 		$this->template->content = View::forge('todo/index', $data);
 
