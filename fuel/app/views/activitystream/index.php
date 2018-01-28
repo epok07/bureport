@@ -16,7 +16,7 @@ Carbon::setLocale('fr');
                     <div class="col-lg-7 ">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>Basic activity stream</h5>
+                                <h5>Basic activity stream - About 12 hours ago ...</h5>
                             </div>
 
                             <div class="ibox-content">

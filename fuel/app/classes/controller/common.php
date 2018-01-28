@@ -10,6 +10,8 @@ class Controller_Common extends Controller_Template
 	public $push_service;	
 
 	public $current_employee;
+	
+	public $data_payload;
 
 	public $directories = array();
 	 
@@ -38,6 +40,16 @@ class Controller_Common extends Controller_Template
 
 		$this->current_user = null;
 
+		// Middleware processing
+		$dt = new Carbon('5 hours ago');
+		$this->data_payload['chats'] = Model_Chat::find('all', array('where' => array( 
+													array('created_at','>=' , $dt->timestamp),
+													)));
+		$this->data_payload['messages'] = Model_Message::find('all');
+		$this->data_payload['todos'] = Model_Todo::find('all');
+
+
+		// Session processing
 		$session = Session::instance();
 
 		$this->current_session = $session;
@@ -84,69 +96,66 @@ class Controller_Common extends Controller_Template
 				'icon' => 'fa-th-large',
 				'submenu' => []
 				),
-		/*	array(
-			'title' => "exams",
-				'url'	=> 'exams',
-				'attrs' => '',
-				'icon' => '',
-				'submenu' => []
-				),
-			array(
-			'title' => "student",
-				'url'	=> 'student',
-				'attrs' => '',
-				'icon' => 'fa-user',
-				'submenu' => []
-				),
-			array(			
-			'title' => "subject",
-				'url'	=> 'subject',
-				'attrs' => '',
-				'icon' => 'fa-file-o',
-				'submenu' => []
-				),
-			array(
-			'title' => "teacher",
-				'url'	=> 'teacher',
-				'attrs' => '',
-				'icon' => 'fa-users',
-				'submenu' => []
-				),
-			array(
-			'title' => "class",
-				'url'	=> 'class',
-				'attrs' => '',
-				'icon' => 'fa-star',
-				'submenu' => []
-				),
-			array(
-			'title' => "school",
-				'url'	=> 'educationcenter',
-				'attrs' => '',
-				'icon' => 'fa-building',
-				'submenu' => []
-				),
-			array(
-			'title' => "Grade",
-				'url'	=> 'grade',
-				'attrs' => '',
-				'icon' => 'fa-bar-chart-o',
-				'submenu' => []
-				),
-		*/	array(
-			'title' => "settings",
-				'url'	=> 'settings',
-				'attrs' => '',
-				'icon' => 'fa-gear',
-				'submenu' => []
-			),
+					/*	array(
+					'title' => "exams",
+						'url'	=> 'exams',
+						'attrs' => '',
+						'icon' => '',
+						'submenu' => []
+						),
+					array(
+					'title' => "student",
+						'url'	=> 'student',
+						'attrs' => '',
+						'icon' => 'fa-user',
+						'submenu' => []
+						),
+					array(			
+					'title' => "subject",
+						'url'	=> 'subject',
+						'attrs' => '',
+						'icon' => 'fa-file-o',
+						'submenu' => []
+						),
+					array(
+					'title' => "teacher",
+						'url'	=> 'teacher',
+						'attrs' => '',
+						'icon' => 'fa-users',
+							'submenu' => []
+							),
+						array(
+						'title' => "class",
+							'url'	=> 'class',
+							'attrs' => '',
+							'icon' => 'fa-star',
+						'submenu' => []
+						),
+					array(
+					'title' => "school",
+						'url'	=> 'educationcenter',
+						'attrs' => '',
+						'icon' => 'fa-building',
+						'submenu' => []
+						),
+					array(
+					'title' => "Grade",
+						'url'	=> 'grade',
+						'attrs' => '',
+						'icon' => 'fa-bar-chart-o',
+						'submenu' => []
+						),
+				*/	array(
+					'title' => "settings",
+						'url'	=> 'settings',
+						'attrs' => '',
+						'icon' => 'fa-gear',
+						'submenu' => []
+					),
 		); 
 
 
 		$this->nav = $temp_nav_uri; //$nav;
-
-
-		
 
 		$this->current_session->set("returning_visitor", Session::get("returning_visitor"));
 
@@ -183,6 +192,7 @@ class Controller_Common extends Controller_Template
 		View::set_global('current_employee', $this->current_employee);
 		View::set_global('nav', $this->nav);
 		View::set_global('push_service', $this->push_service);
+		View::set_global('data_payload', $this->data_payload);
 	}
 
 	

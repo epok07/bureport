@@ -1,13 +1,18 @@
 <?php
+use Carbon\Carbon;
 
 class Controller_Activitystream extends Controller_Admin
 {
+	public $dt;
 
 	public $template = "_layout/inspinia";
 
 	public function action_index()
 	{
-		$data["activitylogs"] = Model_Activitylog::find('all');
+		$this->dt = new Carbon('12 hours ago');
+		$data["activitylogs"] = Model_Activitylog::find('all', array('where' => array( 
+													array('created_at','>=' , $this->dt->timestamp),
+													)));
 
 		$data["label_class"] = array(
 			'created'=> 'label-primary',

@@ -1,72 +1,41 @@
+<?php 
+use Carbon\Carbon;
+
+Carbon::setLocale('fr');
+?>
+
 <div class="small-chat-box fadeInRight animated ">
 
         <div class="heading" draggable="true">
             <small class="chat-date pull-right">
-                02.19.2015
+                <?php echo Carbon::now('Europe/Berlin')->format('d/M/Y h:i:s') ;	?>
             </small>
             Small chat
         </div>
+        <div class="content">
+			<?php if($data_payload['chats']): ?>
+				<?php $count = 0; $current_author_id = 0; $pos = 0; $alter = ['left', 'right']; ?>
+				<?php foreach ($data_payload['chats'] as $index => $item): ?>
+					
+					<div class="<?php  $pos = $count%2; echo ($count%2 == 0) ? 'left': 'right'; ?>">
+		                <div class="author-name">
+		                    <?= $index .'. ' . $item->sender->first_name ." ". $item->sender->last_name;  ?>
+		                    <small class="chat-date">
+		                        <?php echo Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->format('h:i:s') ;
+											//11:24 am ?>
+		                    </small>
+		                </div>
+		                <div class="chat-message">
+		                    <?= $item->message;  ?>
+		                </div>
+		            </div>
+		            <?php $count++;  $current_author_id = $item->from_user_id ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
+             
+    	</div>
+    	
 
-        <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 234px;"><div class="content" style="overflow: hidden; width: auto; height: 234px;">
-
-            <div class="left">
-                <div class="author-name">
-                    Monica Jackson <small class="chat-date">
-                    10:02 am
-                </small>
-                </div>
-                <div class="chat-message active">
-                    Lorem Ipsum is simply dummy text input.
-                </div>
-
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Mick Smith
-                    <small class="chat-date">
-                        11:24 am
-                    </small>
-                </div>
-                <div class="chat-message">
-                    Lorem Ipsum is simpl.
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Alice Novak
-                    <small class="chat-date">
-                        08:45 pm
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    Check this stock char.
-                </div>
-            </div>
-            <div class="right">
-                <div class="author-name">
-                    Anna Lamson
-                    <small class="chat-date">
-                        11:24 am
-                    </small>
-                </div>
-                <div class="chat-message">
-                    The standard chunk of Lorem Ipsum
-                </div>
-            </div>
-            <div class="left">
-                <div class="author-name">
-                    Mick Lane
-                    <small class="chat-date">
-                        08:45 pm
-                    </small>
-                </div>
-                <div class="chat-message active">
-                    I belive that. Lorem Ipsum is simply dummy text.
-                </div>
-            </div>
-
-
-        </div><div class="slimScrollBar" style="background: rgb(0, 0, 0) none repeat scroll 0% 0%; width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 171.113px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51) none repeat scroll 0% 0%; opacity: 0.4; z-index: 90; right: 1px;"></div></div>
         <div class="form-chat">
             <div class="input-group input-group-sm"><input class="form-control" type="text"> <span class="input-group-btn"> <button class="btn btn-primary" type="button">Send
             </button> </span></div>
@@ -76,9 +45,24 @@
 
 	<div id="small-chat">
 
-        <span class="badge badge-warning pull-right">5</span>
+        <span class="badge badge-warning pull-right">
+        	 <?= count($data_payload['chats']); //ToDo: count unseen chat messages ?>
+        </span>
         <a class="open-small-chat">
             <i class="fa fa-comments"></i>
 
         </a>
     </div>
+
+    <script>
+
+    $(document).ready(function () {
+
+        // Add slimscroll to element
+        //$('.small-chat-box .content').slimscroll({
+        //    height: '234px'
+        //});
+
+    });
+
+</script>

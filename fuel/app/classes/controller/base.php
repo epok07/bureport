@@ -13,6 +13,8 @@ class Controller_Base extends Controller_Template
 
 	public $current_employee;
 
+	public $data_payload;
+
 	public function before()
 	{
 		parent::before();
@@ -37,6 +39,11 @@ class Controller_Base extends Controller_Template
 		$this->push_service = $pusher;
 
 		$this->current_user = null;
+
+		// Middleware processing
+		$this->data_payload['chats'] = Model_Chat::find('all');
+		$this->data_payload['messages'] = Model_Message::find('all');
+		$this->data_payload['todos'] = Model_Todo::find('all');
 
 		$session = Session::instance();
 
