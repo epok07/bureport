@@ -2,6 +2,7 @@
 <?php 
 use Carbon\Carbon; 
 ?>
+<!-- 
 <?php if ($messages OR FALSE): ?>
 <table class="table table-striped">
 	<thead>
@@ -43,7 +44,8 @@ use Carbon\Carbon;
 <p>No Messages.</p>
 
 <?php endif; ?>
-<!-- <p>
+
+<p>
 	<?php echo Html::anchor('message/create', 'Add new Message', array('class' => 'btn btn-success')); ?>
 
 </p> --> 
@@ -137,7 +139,12 @@ use Carbon\Carbon;
                     	<?php echo Html::anchor('message/view/'.$item->id, $item->subject, array('class' => '')); ?>
                     </td>
                     <td class=""></td>
-                    <td class="text-right mail-date"><?php echo Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->toDateTimeString() ; ?></td>
+                    <td class="text-right mail-date"><?php echo Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->toDateTimeString() ; ?> 
+                        &middot;
+                         
+                        <?php echo Html::anchor('message/delete/'.$item->id, '<i class="fa fa-times"></i>', array('class' => 'btn btn-sm btn-white', 'onclick' => "return confirm('Are you sure?')", 'data-toggle'=>"tooltip", 'data-placement'=>"top", 'title'=>"Move to trash" )); ?>
+
+                    </td>
                  
 				</tr>
 				<?php endforeach; ?>	 
@@ -150,3 +157,48 @@ use Carbon\Carbon;
             </div>
         </div>
 
+ <script >
+ 
+   
+
+(function(){
+
+   Pusher.logToConsole = true;
+
+    var pusher = new Pusher('3607fe1af3ddf0c619ad', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var datagauge = ['data', 95];
+      data = {};
+      data.data1 = 95;
+      data.data2 =  95;
+    
+
+    var channel = pusher.subscribe('lhcm-channel');
+    channel.bind('prodreport', function(data) {
+      
+      console.log('PushNotification',data.message + ' '+data.name);
+       var datagauge1 = ['data', data.data1] || datagauge,
+           datagauge2 = ['data', data.data2] || datagauge;
+            <?php  //$_mydata = $_POST['content_data']; ?>
+
+        // Notice 
+        // Display a info toast, with a title
+          toastr.info('Data Push',"<p> "+  data.message  +"  </p>");
+
+           // toastr.success('Data Updated',"<p> <?php echo implode('</p><p>', e((array) Session::get_flash('info'))); ?>   </p>"); 
+
+        
+
+      //alert(data.message);
+    });
+
+   
+
+})();
+
+ 
+ 
+</script>

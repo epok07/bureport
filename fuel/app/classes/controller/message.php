@@ -22,8 +22,9 @@ class Controller_Message extends Controller_Admin
 		}
 
 		// get the list of named parameters
-		$params = Request::active();
-		Debug::dump($params->method_params[0]);
+		// $params = Request::active();
+		// Debug::dump($params->method_params[0]);
+		
 		$this->template->title = "Message";
 		$this->template->content = View::forge('message/view', $data)->auto_filter(false);
 
@@ -31,6 +32,11 @@ class Controller_Message extends Controller_Admin
 
 	public function action_create()
 	{
+		  $data['message'] = 'hello Francky ';
+		  $data['name'] = 'Francky ';
+		  $data['data'] = 60;
+		  $pusher = $this->push_service->trigger('lhcm-channel', 'prodreport', $data);
+
 		if (Input::method() == 'POST')
 		{
 			$val = Model_Message::validate('create');
@@ -50,9 +56,10 @@ class Controller_Message extends Controller_Admin
 
 				if ($message and $message->save())
 				{
-					$data  = array("message" => $message->subject);
-					Session::set_flash('success', 'Added message #'.$message->id.'.');
+					$data['message']=  $message->subject .'<br> Added message #'.$message->id.'.';
+					$data['data'] = $message->id;
 					$pusher = $this->push_service->trigger('lhcm-channel', 'prodreport', $data);
+					Session::set_flash('success', 'Added message #'.$message->id.'.');
 
 		  			Session::set_flash('info', $data);
 		  			Cookie::set('data_message', $message->subject , 60 * 5 );
@@ -144,7 +151,10 @@ class Controller_Message extends Controller_Admin
 		{
 			$message->delete();
 
-			Session::set_flash('success', 'Deleted message #'.$id);
+			Session::set_flash('success', 'Deleted message #'.$id . " by ".$this->current_user->username);
+			$data['message']=  'Deleted message #'.$id . "by ". json_encode($this->current_user->username) ;
+			$data['data'] = $id;
+			$pusher = $this->push_service->trigger('lhcm-channel', 'prodreport', $data);
 		}
 
 		else

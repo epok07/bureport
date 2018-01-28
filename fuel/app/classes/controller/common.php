@@ -48,14 +48,17 @@ class Controller_Common extends Controller_Template
 
 		$temp_nav_uri = array();
 		$iconset = array(
-			'fa-users', 
+			'fa-bullhorn',
 			'fa-th-large', 
+			'fa-envelope',
+			 'fa-feed',
+			'fa-gear', 
+			'fa-bar-chart-o', 
+			'fa-check', 
+			'fa-users', 
 			'fa-mail', 
 			'fa-star', 
 			'fa-file-o', 
-			'fa-gear', 
-			'fa-check', 
-			'fa-bar-chart-o', 
 			'fa-gear', 'fa-gear', 'fa-gear', 
 			);
 
@@ -205,6 +208,7 @@ class Controller_Common extends Controller_Template
 			            foreach(glob("{$directory}/*.{$extension}") as $file) {
 			            	if (!preg_match('/test/', $file) 
 			            		AND !preg_match('/welcome/', $file)
+			            		AND !preg_match('/admin/', $file)
 			            		AND !preg_match('/demo/', $file)
 			            		AND !preg_match('/base/', $file)
 			            		AND !preg_match('/demo/', $file)

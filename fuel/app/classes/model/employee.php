@@ -87,6 +87,14 @@ class Model_Employee extends \Orm\Model_Soft
 		),
 	);
 
+	protected static $_conditions = array(
+        'order_by' => array('id' => 'desc'),
+        //'where' => array(
+        //    array('publish_date', '>', 1370721177),
+        //    array('published', '=', 1),
+        //),
+    );
+
 	protected static $_soft_delete = array(
 		'mysql_timestamp' => false,
 	);

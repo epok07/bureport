@@ -30,6 +30,14 @@ class Model_Activitylog extends \Orm\Model_Soft
 		),
 	);
 
+	protected static $_conditions = array(
+        'order_by' => array('created_at' => 'desc'),
+        //'where' => array(
+        //    array('publish_date', '>', 1370721177),
+        //    array('published', '=', 1),
+        //),
+    );
+
 	protected static $_soft_delete = array(
 		'mysql_timestamp' => false,
 	);

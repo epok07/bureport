@@ -67,7 +67,8 @@ toastr.options = {
     var channel = pusher.subscribe('lhcm-channel');
     channel.bind('prodreport', function(data) {
       
-      console.log('PushNotification',data.message + ' '+data.name);
+      //console.log('PushNotification', data.message + ' '+data.name);
+      //toastr.info('Data Push',"<p> " +" data.message + "</p>");
       //alert(data.message);
     });
   </script>
@@ -160,6 +161,50 @@ toastr.options = {
              $('.summernote').summernote();
         });
     </script>
+
+    <script >
+ 
+   
+/*
+(function(){
+
+   Pusher.logToConsole = true;
+
+    var pusher = new Pusher('3607fe1af3ddf0c619ad', {
+      cluster: 'eu',
+      encrypted: true
+    });
+
+    var datagauge = ['data', 95];
+      data = {};
+      data.data1 = 95;
+      data.data2 =  95;
+    
+
+    var channel = pusher.subscribe('lhcm-channel');
+    channel.bind('prodreport', function(data) {
+      
+      console.log('PushNotification',data.message + ' '+data.name);
+       var datagauge1 = ['data', data.data1] || datagauge,
+           datagauge2 = ['data', data.data2] || datagauge;
+            <?php  //$_mydata = $_POST['content_data']; ?>
+
+        // Notice 
+        // Display a info toast, with a title
+          toastr.info('Data Push',"<p> " +" data.message + "</p>");
+
+           // toastr.success('Data Updated',"<p> <?php echo implode('</p><p>', e((array) Session::get_flash('info'))); ?>   </p>"); 
+
+        
+
+      //alert(data.message);
+    });
+
+   
+
+})();
+ */ 
+</script>
     
 
    

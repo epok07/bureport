@@ -2,7 +2,7 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-content mailbox-content">
                         <div class="file-manager">
-                            <?php echo Html::anchor('message/create', 'Add new Message / Compose Mail', array('class' => 'btn btn btn-block btn-primary compose-mail')); ?>
+                            <?php echo Html::anchor('message/create', 'Compose eMessage', array('class' => 'btn btn btn-block btn-primary compose-mail')); ?>
                             <div class="space-25"></div>
                             <h5>Folders</h5>
                             <ul class="folder-list m-b-md" style="padding: 0">

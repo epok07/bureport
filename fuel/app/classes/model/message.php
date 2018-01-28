@@ -32,6 +32,14 @@ class Model_Message extends Model
        	 ),
 	);
 
+	protected static $_conditions = array(
+        'order_by' => array('created_at' => 'desc'),
+        //'where' => array(
+        //    array('publish_date', '>', 1370721177),
+        //    array('published', '=', 1),
+        //),
+    );
+
 	protected static $_belongs_to = array(
 		"sender" => array(
 		        'key_from' => 'form_user_id',
@@ -40,7 +48,7 @@ class Model_Message extends Model
 		        'cascade_save' => true,
 		        'cascade_delete' => false,
 		    ),
-		 "receipiend" => array(
+		 "recipient" => array(
 		        'key_from' => 'to_user_id',
 		        'model_to' => 'Model_Employee',
 		        'key_to' => 'id',
@@ -63,5 +71,7 @@ class Model_Message extends Model
 
 		return $val;
 	}
+
+
 
 }
