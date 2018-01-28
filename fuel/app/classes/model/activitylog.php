@@ -30,6 +30,20 @@ class Model_Activitylog extends \Orm\Model_Soft
 		),
 	);
 
+	protected static $_belongs_to = array(
+		"owner" => array(
+		        'key_from' => 'created_by',
+		        'model_to' => 'Model_Employee',
+		        'key_to' => 'id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),   
+
+
+		);
+
+
+
 	protected static $_conditions = array(
         'order_by' => array('created_at' => 'desc'),
         //'where' => array(

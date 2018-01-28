@@ -48,6 +48,7 @@ class Controller_Common extends Controller_Template
 
 		$temp_nav_uri = array();
 		$iconset = array(
+			'fa-bell-o',
 			'fa-bullhorn',
 			'fa-th-large', 
 			'fa-envelope',
