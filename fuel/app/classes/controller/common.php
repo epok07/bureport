@@ -62,11 +62,14 @@ class Controller_Common extends Controller_Template
 		$iconset = array(
 			'fa-bell-o',
 			'fa-bullhorn',
+			'fa-comments',
 			'fa-th-large', 
 			'fa-envelope',
 			 'fa-feed',
-			'fa-gear', 
-			'fa-bar-chart-o', 
+			'fa-gears', 
+			//'fa-bar-chart-o', 
+			//'fa-flag-checkered'
+			'fa-industry',
 			'fa-check', 
 			'fa-users', 
 			'fa-mail', 

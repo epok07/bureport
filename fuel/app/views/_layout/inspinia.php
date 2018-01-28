@@ -151,6 +151,9 @@ toastr.options = {
          //Summer note
          'plugins/summernote/summernote.min.js',
 
+         //App scripts 
+         'app.dev.js',
+
     )); ?>
 
     <script>

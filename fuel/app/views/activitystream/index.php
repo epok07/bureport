@@ -19,7 +19,7 @@ Carbon::setLocale('fr');
                                 <h5>Basic activity stream - About 12 hours ago ...</h5>
                             </div>
 
-                            <div class="ibox-content">
+                            <div class="ibox-content scroll_content">
 							<?php if($activitylogs): ?>
                             <?php foreach($activitylogs as $key => $log_item) : ?>
 
@@ -338,3 +338,18 @@ Carbon::setLocale('fr');
                         </div>
                     </div> -->
                 </div>
+
+                
+
+                <script>
+
+    $(document).ready(function () {
+
+        // Add slimscroll to element
+        $('.scroll_content').slimscroll({
+            height: '350px'
+        });
+
+    });
+
+</script>

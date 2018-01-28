@@ -29,8 +29,8 @@ class Model_Todo extends Model
 	protected static $_conditions = array(
         'order_by' => array('created_at' => 'desc'),
         //'where' => array(
-        //    array('publish_date', '>', 1370721177),
-        //    array('published', '=', 1),
+            //array('publish_date', '>', 1370721177),
+        //    array('created_by', '=', self::get_current_user_id()),
         //),
     );
 
@@ -45,6 +45,12 @@ class Model_Todo extends Model
 		$val->add_field('start_date', 'Start Date', 'required');
 
 		return $val;
+	}
+
+	public static function get_current_user_id()
+	{
+		list ($auth_driver, $created_by) = \Auth::get_user_id();
+		return $created_by;
 	}
 
 }
