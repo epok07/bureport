@@ -65,9 +65,12 @@ class Controller_Loading extends Controller_Admin
 				{
 					 
 					// both main and related object already exist
-					
-
+			
 					Session::set_flash('success', 'Added loading #'.$loading->id.'.');
+
+					$data['data1'] = Model_Silo::get_current_capacity_rate(1) ;
+		 			$data['data2'] = Model_Silo::get_current_capacity_rate(2) ;
+		  			$pusher = $this->push_service->trigger('lhcm-channel', 'prodreport', $data);
 
 					Response::redirect('loading');
 				}
@@ -161,6 +164,10 @@ class Controller_Loading extends Controller_Admin
 		if ($loading = Model_Loading::find($id))
 		{
 			$loading->delete();
+
+			$data['data1'] = Model_Silo::get_current_capacity_rate(1) ;
+		 			$data['data2'] = Model_Silo::get_current_capacity_rate(2) ;
+		  			$pusher = $this->push_service->trigger('lhcm-channel', 'prodreport', $data);
 
 			Session::set_flash('success', 'Deleted loading #'.$id);
 		}

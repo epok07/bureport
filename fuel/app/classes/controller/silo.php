@@ -5,7 +5,19 @@ class Controller_Silo extends Controller_Admin
 
 	public function action_index()
 	{
-		$data['silos'] = Model_Silo::find('all');
+		$data['silos'] = Model_Silo::find('all', array(
+                    'related' => array(
+                        'loadings' 
+                        )
+                
+            ));
+		$capacity_rate = []; 
+		foreach ($data['silos'] as $key => $_silo) {
+			$capacity_rate[$key] = Model_Silo::get_current_capacity_rate($_silo->id);
+		}
+		$data['capacity_rate'] = $capacity_rate;
+		//Debug::dump($capacity_rate);
+		$data["subnav"] = array('index'=> 'active' );
 		$this->template->title = "Silos";
 		$this->template->content = View::forge('silo/index', $data);
 
@@ -20,7 +32,7 @@ class Controller_Silo extends Controller_Admin
 			Session::set_flash('error', 'Could not find silo #'.$id);
 			Response::redirect('silo');
 		}
-
+		$data["subnav"] = array('view'=> 'active' );
 		$this->template->title = "Silo";
 		$this->template->content = View::forge('silo/view', $data);
 

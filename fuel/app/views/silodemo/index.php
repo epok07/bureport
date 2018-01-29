@@ -75,21 +75,25 @@ function newPopup(url) {
       cluster: 'eu',
       encrypted: true
     });
-
+      <?php 
+       
+        $taux_silo_1 = Model_Silo::get_current_capacity_rate(1) ;
+        $taux_silo_2 = Model_Silo::get_current_capacity_rate(2) ;
+      ?>
     var datagauge = ['data', 95];
     	data = {};
-    	data.data1 = 95;
-    	data.data2 =  95;
+    	data.data1 = <?=  $taux_silo_1 ;?> ;
+    	data.data2 =  <?=  $taux_silo_2 ;?>;
     
 
     var channel = pusher.subscribe('lhcm-channel');
     channel.bind('prodreport', function(data) {
       
       console.log('PushNotification',data.message + ' '+data.name);
-       var datagauge1 = ['data', data.data1] || datagauge,
-           datagauge2 = ['data', data.data2] || datagauge,
-           datapie1   = ['data1', data.data1] || ['data1', 30],
-           datapie2   = ['data2', data.data2] || ['data2', 120]
+       var datagauge1 = ['data', data.data1] || <?=  $taux_silo_1 ;?>,
+           datagauge2 = ['data', data.data2] || <?=  $taux_silo_2 ;?>,
+           datapie1   = ['data1', data.data1] || ['data1', <?=  $taux_silo_1 ;?>],
+           datapie2   = ['data2', data.data2] || ['data2', <?=  $taux_silo_2 ;?>]
            ;
            	<?php  //$_mydata = $_POST['content_data']; ?>
 
@@ -223,7 +227,7 @@ function newPopup(url) {
                 bindto: '#gauge1',
                 data:{
                     columns: [
-                        ['data', 95]
+                        ['data', <?=  $taux_silo_1 ;?>]
                     ],
 
                     type: 'gauge'
@@ -238,7 +242,7 @@ function newPopup(url) {
                 bindto: '#gauge2',
                 data:{
                     columns: [
-                        ['data', 95]
+                        ['data', <?=  $taux_silo_2 ;?>]
                     ],
 
                     type: 'gauge'
@@ -253,8 +257,8 @@ function newPopup(url) {
                 bindto: '#pie',
                 data:{
                     columns: [
-                        ['data1', 30],
-                        ['data2', 120]
+                        ['data1', <?=  $taux_silo_1 ;?>],
+                        ['data2', <?=  $taux_silo_2 ;?>]
                     ],
                     colors:{
                         data1: '#1ab394',

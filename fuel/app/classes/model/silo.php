@@ -89,12 +89,30 @@ class Model_Silo extends Model
                         )
                 
             ));
-        $loads = $silo->loadings ;
-         $volume = 0;
-        foreach ($loads as $key => $load) {
-            $volume +=  $load->weight;
-        }
-        return $volume;
+		if(isset($silo->loadings)){
+			 $loads = $silo->loadings ;
+			   $volume = 0;
+	        foreach ($loads as $key => $load) {
+	            $volume +=  $load->weight;
+	        }
+	        return $volume;
+		}else{
+			 return 0;
+		}
+       
+       
     }
+
+    public static function get_current_capacity_rate($silo_id)
+	{
+		if(is_null($silo_id))  return null;
+
+		$silo = self::find($silo_id);
+		$current_capacity = self::get_current_capacity($silo_id);
+
+		 $rate = 100 - (($silo->capacity - $current_capacity) / $silo->capacity ) * 100 ;
+		return floor($rate);
+	}
+
 
 }
