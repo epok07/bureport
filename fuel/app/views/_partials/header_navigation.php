@@ -1,3 +1,10 @@
+<?php 
+use Carbon\Carbon;
+ Carbon::setLocale('fr');
+$dt = new Carbon;
+$dt->setlocale('fr');
+?>
+
 <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
@@ -9,26 +16,49 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
+                    <div class="ib topbar-dropdown">
+                    <label for="topbar-multiple" class="control-label pr10 fs11 text-muted">Reporting Period</label>
+                    <select id="topbar-multiple" class="" style="display: visible;">
+                    <optgroup label="Filter By:">
+                    <option value="1-1">Last 30 Days</option>
+                    <option value="1-2" selected="selected">Last 60 Days</option>
+                    <option value="1-3">Last Year</option>
+                    </optgroup>
+                    </select>
+                    </div>
+                </li>
+                <li>
                     <span class="m-r-sm text-muted welcome-message"> <?php //Welcome to INSPINIA+ Admin Theme. ?> </span>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning"> <?= count($data_payload['messages']); ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
-                                </a>
-                                <div class="media-body">
-                                    <small class="pull-right">46h ago</small>
-                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                    <?php if($data_payload['messages']): ?>
+                
+                        <?php foreach ($data_payload['messages'] as $index => $item): ?>
+                             
+                            <li>
+                                <div class="dropdown-messages-box">
+                                    <a href="profile.html" class="pull-left">
+                                        <?= Model_Employee::get_avatar($item->form_user_id, 28); ?>
+                                    </a>
+                                    <div class="media-body">
+                                        <small class="pull-right"> <?= Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->diffForHumans();?></small>
+                                        <?= Str::truncate($item->message,80,' ...');  ?><br>
+                                        <small class="text-muted"><?php echo  Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->format('l M jS- h:i:s') ;
+                                                    //  Thu, 26 - 18:39:23; ?></small>
+                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
+                            </li>
+
+                             <li class="divider"></li>
+                             
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                        
+                        <!-- <li class="divider"></li>
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
@@ -61,7 +91,7 @@
                                     <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
                                 </a>
                             </div>
-                        </li>
+                        </li> -->
                     </ul>
                 </li>
                 <li class="dropdown">

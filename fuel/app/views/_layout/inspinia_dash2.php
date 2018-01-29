@@ -67,7 +67,7 @@
         <div class="row border-bottom">
 	        <?= View::forge('_partials/header_navigation');?>
         </div>
-			 <?= View::forge('_partials/sidebar_right_msg');?>
+			 <?= View::forge('_partials/sidebar_right_msg')->auto_filter(false);?>
 
             <div class="wrapper wrapper-content">
                 <?php echo $content; ?>

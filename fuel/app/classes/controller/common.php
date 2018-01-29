@@ -10,6 +10,8 @@ class Controller_Common extends Controller_Template
 	public $push_service;	
 
 	public $current_employee;
+
+	public $current_user;
 	
 	public $data_payload;
 
@@ -22,6 +24,27 @@ class Controller_Common extends Controller_Template
 		if(!Auth::check()){
 		 //$this->template = "_layout/inspinia_login";
 
+		}
+
+		foreach (\Auth::verified() as $driver)
+		{
+			if (($id = $driver->get_user_id()) !== false)
+			{
+				$this->current_user = Model\Auth_User::find($id[1]);
+				//$auth = \Auth::instance();
+				//$auth->force_login(2);
+				//Debug::dump($id[1]); die();
+				$this->current_employee = Model_Employee::find('first', 
+					/////array( 
+						//"related" => array('employee', 
+					//////		array(
+					//////			"where" =>array(array("user_id", $id[1]))		
+					/////		)
+						//)
+					/////), 
+					array( "where" =>array(array("user_id", $id[1]))	));
+			}
+			break;
 		}
 
 		// Pusher config
@@ -38,15 +61,31 @@ class Controller_Common extends Controller_Template
 
 		$this->push_service = $pusher;
 
-		$this->current_user = null;
+		//$this->current_user = null;
 
 		// Middleware processing
 		$dt = new Carbon('5 hours ago');
-		$this->data_payload['chats'] = Model_Chat::find('all', array('where' => array( 
+		if( Auth::check() ){
+			$this->data_payload['chats'] = Model_Chat::find('all', array('where' => array( 
 													array('created_at','>=' , $dt->timestamp),
 													)));
-		$this->data_payload['messages'] = Model_Message::find('all');
-		$this->data_payload['todos'] = Model_Todo::find('all');
+			$this->data_payload['messages'] = Model_Message::find('all', 
+					[
+						'where' =>  [
+							['to_user_id' => $this->current_user->id]
+						],
+						'limit'=> 5
+					]
+				);
+			$this->data_payload['todos'] = Model_Todo::find('all',
+				[
+						'where' =>  [
+							['created_by' => $this->current_user->id]
+						],
+						'limit'=> 5
+					]);
+		}
+		
 
 
 		// Session processing
@@ -163,32 +202,7 @@ class Controller_Common extends Controller_Template
 		$this->current_session->set("returning_visitor", Session::get("returning_visitor"));
 
 
-		foreach (\Auth::verified() as $driver)
-		{
-			if (($id = $driver->get_user_id()) !== false)
-			{
-				$this->current_user = Model\Auth_User::find($id[1]);
-				//$auth = \Auth::instance();
-				//$auth->force_login(2);
-				//Debug::dump($id[1]); die();
-				$this->current_employee = Model_Employee::find('first', 
-					/////array( 
-						//"related" => array('employee', 
-					//////		array(
-					//////			"where" =>array(array("user_id", $id[1]))		
-					/////		)
-						//)
-					/////), 
-					array(
-						
-								"where" =>array(array("user_id", $id[1]))		
-							));
-							
-
-
-			}
-			break;
-		}
+		$view = new View;
 
 		// Set a global variable so views can use it
 		View::set_global('current_user', $this->current_user);
@@ -196,6 +210,12 @@ class Controller_Common extends Controller_Template
 		View::set_global('nav', $this->nav);
 		View::set_global('push_service', $this->push_service);
 		View::set_global('data_payload', $this->data_payload);
+		//$view->set_safe('data_payload', $this->data_payload, null);
+		/*$view->set_safe(array(
+			    // 'users' => $users,
+			    'data_payload' => $this->data_payload,
+			), null);*/
+
 	}
 
 	
@@ -228,6 +248,8 @@ class Controller_Common extends Controller_Template
 			            		AND !preg_match('/demo/', $file)
 			            		AND !preg_match('/common/', $file)
 			            		AND !preg_match('/jobtitle/', $file)
+			            		AND !preg_match('/inspinia/', $file)
+			            		AND !preg_match('/api/', $file)
 			            		) {
 			            	//Debug::dump($file); die();
 

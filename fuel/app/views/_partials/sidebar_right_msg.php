@@ -1,60 +1,44 @@
 <?php 
 use Carbon\Carbon;
-Carbon::setLocale('en');
+ Carbon::setLocale('de');
+$dt = new Carbon;
+$dt->setlocale('fr');
 ?>
 
         <div class="sidebar-panel" style="min-height: 1252.9px;">
                 <div>
-                    <h4>Messages <span class="badge badge-info pull-right">16</span></h4>
-                    <div class="feed-element">
-                        <a href="#" class="pull-left">
-                            <?= Asset::img("a1.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
-                        </a>
-                        <div class="media-body">
-                            There are many variations of passages of Lorem Ipsum available.
-                            <br>
-                            <small class="text-muted">Today 4:21 pm
-                                <?= Carbon::now()->subMinutes(13)->diffForHumans();?>
-                            </small>
-                        </div>
-                    </div>
-                    <div class="feed-element">
-                        <a href="#" class="pull-left">
-                            <?= Asset::img("a2.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
-                        </a>
-                        <div class="media-body">
-                            TIt is a long established fact that.
-                            <br>
-                            <small class="text-muted"> <!-- Yesterday 2:45 pm -->  <?php 
-                            $dt = Carbon::create(2018, 1, 25, 14, 15, 16);
- 
-                           echo $dt->toDayDateTimeString(); 
-                           echo "<br>" .  $dt->diffForHumans(); ;
-                           ?>
-                               
-                           </small>
-                        </div>
-                    </div>
-                    <div class="feed-element">
-                        <a href="#" class="pull-left">
-                            <?= Asset::img("a3.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
-                        </a>
-                        <div class="media-body">
-                            Many desktop publishing packages.
-                            <br>
-                            <small class="text-muted">Yesterday 1:10 pm</small>
-                        </div>
-                    </div>
-                    <div class="feed-element">
-                        <a href="#" class="pull-left">
-                            <?= Asset::img("a4.jpg", ['alt'=>"image" ,'class'=>"img-circle"]);?>
-                        </a>
-                        <div class="media-body">
-                            The generated Lorem Ipsum is therefore always free.
-                            <br>
-                            <small class="text-muted">Monday 8:37 pm</small>
-                        </div>
-                    </div>
+                    <h4>Messages <span class="badge badge-info pull-right">
+                        <?= count($data_payload['messages']); ?>
+                    </span></h4>
+
+                    <?php if($data_payload['messages']): ?>
+                
+                        <?php foreach ($data_payload['messages'] as $index => $item): ?>
+                            
+                            
+
+                            <div class="feed-element">
+                                <a href="#" class="pull-left">
+                                    <?= Model_Employee::get_avatar($item->form_user_id, 32); ?>
+                                </a>
+                                <div class="media-body">
+                                 <small class="text-muted  right"> 
+                                    <?php echo  Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->format('l M jS- h:i:s') ;
+                                                    //  Thu, 26 - 18:39:23; ?>
+                                                    </small>
+                                    <?= Str::truncate($item->message,80,' ...');  ?>
+                                    <br>
+                                    <small class="text-muted"> 
+                                                    <br>
+                                        <?= Carbon::createFromTimestamp($item->created_at, 'Europe/Berlin')->diffForHumans();?>
+                                    </small>
+                                </div>
+                            </div>
+                             
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+            
+
                 </div>
                 <div class="m-t-md">
                     <h4>Statistics</h4>
