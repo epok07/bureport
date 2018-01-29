@@ -69,4 +69,84 @@ class Controller_Settings extends Controller_Admin
 		$this->template->content = View::forge('settings/users', $data);
 	}
 
+	public function action_item()
+	{
+		$data["subnav"] = array('item'=> 'active' );
+
+		$data['jobtitles'] = Model_Jobtitle::find('all');
+		$data['users'] = Model_User::find('all');
+		$data['employees'] = Model_Employee::find('all');
+		$data['items'] = Model_Item::find('all');
+
+		//$this->template->title = "Jobtitles";
+		//$this->template->content = View::forge('jobtitle/index', $data);
+
+		$this->template->title = 'Settings &raquo; Itemms';
+		$this->template->content = View::forge('settings/items', $data);
+	}
+
+	public function action_site()
+	{
+		$data["subnav"] = array('site'=> 'active' );
+
+		$data['jobtitles'] = Model_Jobtitle::find('all');
+		$data['users'] = Model_User::find('all');
+		$data['employees'] = Model_Employee::find('all');
+		$data['sites'] = Model_Site::find('all');
+
+		//$this->template->title = "Jobtitles";
+		//$this->template->content = View::forge('jobtitle/index', $data);
+
+		$this->template->title = 'Settings &raquo; sites';
+		$this->template->content = View::forge('settings/sites', $data);
+	}
+
+	public function action_vendor()
+	{
+		$data["subnav"] = array('vendor'=> 'active' );
+
+		$data['jobtitles'] = Model_Jobtitle::find('all');
+		$data['users'] = Model_User::find('all');
+		$data['employees'] = Model_Employee::find('all');
+		$data['vendors'] = Model_Vendor::find('all');
+
+		//$this->template->title = "Jobtitles";
+		//$this->template->content = View::forge('jobtitle/index', $data);
+
+		$this->template->title = 'Settings &raquo; vendors';
+		$this->template->content = View::forge('settings/vendors', $data);
+	}
+
+	public function action_category()
+	{
+		$data["subnav"] = array('category'=> 'active' );
+
+		$data['jobtitles'] = Model_Jobtitle::find('all');
+		$data['users'] = Model_User::find('all');
+		$data['employees'] = Model_Employee::find('all');
+		$data['categories'] = Model_Category::find('all');
+
+		//$this->template->title = "Jobtitles";
+		//$this->template->content = View::forge('jobtitle/index', $data);
+
+		$this->template->title = 'Settings &raquo; categories';
+		$this->template->content = View::forge('settings/categories', $data);
+	}
+
+	public function action_machinery()
+	{
+		$data["subnav"] = array('machinery'=> 'active' );
+
+		$data['jobtitles'] = Model_Jobtitle::find('all');
+		$data['users'] = Model_User::find('all');
+		$data['employees'] = Model_Employee::find('all');
+		$data['machineries'] = Model_Machinery::find('all');
+
+		//$this->template->title = "Jobtitles";
+		//$this->template->content = View::forge('jobtitle/index', $data);
+
+		$this->template->title = 'Settings &raquo; machineries';
+		$this->template->content = View::forge('settings/machineries', $data);
+	}
+
 }

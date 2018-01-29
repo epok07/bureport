@@ -279,6 +279,13 @@ class Controller_Common extends Controller_Template
 			            		AND !preg_match('/api/', $file)
 			            		AND !preg_match('/dashboard/', $file)
 			            		AND !preg_match('/settings/', $file)
+			            		AND !preg_match('/company/', $file)
+			            		AND !preg_match('/item/', $file)
+			            		AND !preg_match('/machinery/', $file)
+			            		AND !preg_match('/vendor/', $file)
+			            		AND !preg_match('/category/', $file)
+			            		AND !preg_match('/site/', $file)
+
 			            		) {
 			            	//Debug::dump($file); die();
 

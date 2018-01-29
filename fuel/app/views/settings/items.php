@@ -15,6 +15,7 @@
 	<li class='<?php echo Arr::get($subnav, "site" ); ?>'><?php echo Html::anchor('settings/site','Site');?></li>
 
 </ul>
-<p>Index</p>
+
+<?= View::forge('item/index', ['items'=> $items]); ?>
 
 

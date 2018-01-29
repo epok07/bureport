@@ -36,6 +36,7 @@ class Controller_Site extends Controller_Admin
 			{
 				$site = Model_Site::forge(array(
 					'company_id' => Input::post('company_id'),
+					'category_id' => Input::post('category_id'),
 					'title' => Input::post('title'),
 					'enabled' => Input::post('enabled'),
 				));

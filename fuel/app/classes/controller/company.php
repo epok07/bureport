@@ -1,7 +1,8 @@
 <?php
-class Controller_Company extends Controller_Template
+class Controller_Company extends Controller_Admin
 {
-
+	public $template = "_layout/inspinia";
+	
 	public function action_index()
 	{
 		$data['companies'] = Model_Company::find('all');
