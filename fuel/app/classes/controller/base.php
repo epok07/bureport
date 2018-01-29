@@ -45,6 +45,35 @@ class Controller_Base extends Controller_Template
 		$this->data_payload['messages'] = Model_Message::find('all');
 		$this->data_payload['todos'] = Model_Todo::find('all');
 
+		// Middleware processing
+		$dt = new Carbon('5 hours ago');
+		if( Auth::check() ){
+			$this->data_payload['chats'] = Model_Chat::find('all', array('where' => array( 
+													array('created_at','>=' , $dt->timestamp),
+													)));
+			$this->data_payload['messages'] = Model_Message::find('all', 
+					[
+						'where' =>  [
+							['to_user_id' => $this->current_user->id]
+						],
+						'limit'=> 5
+					]
+				);
+			$this->data_payload['todos'] = Model_Todo::find('all',
+				[
+						'where' =>  [
+							['created_by' => $this->current_user->id]
+						],
+						'limit'=> 5
+					]);
+		}else{
+			$this->data_payload['chats'] = array();
+			$this->data_payload['messages'] = array();
+			$this->data_payload['todos'] = array();
+
+		}
+		
+
 		$session = Session::instance();
 
 		$this->current_session = $session;
@@ -149,6 +178,7 @@ class Controller_Base extends Controller_Template
 		View::set_global('current_employee', $this->current_employee);
 		View::set_global('nav', $this->nav);
 		View::set_global('push_service', $this->push_service);
+		View::set_global('data_payload', $this->data_payload);
 	}
 
 
