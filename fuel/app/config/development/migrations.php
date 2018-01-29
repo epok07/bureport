@@ -15,6 +15,13 @@ return array (
         6 => '007_create_settings',
         7 => '008_create_messages',
         8 => '009_create_chats',
+        9 => '010_create_categories',
+        10 => '011_create_items',
+        11 => '012_create_vendors',
+        12 => '013_create_loadings',
+        13 => '014_create_sites',
+        14 => '015_create_machineries',
+        15 => '016_create_silos',
       ),
     ),
     'module' => 

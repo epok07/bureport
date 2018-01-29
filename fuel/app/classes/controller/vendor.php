@@ -1,6 +1,7 @@
 <?php
-class Controller_Vendor extends Controller_Template
+class Controller_Vendor extends Controller_Admin
 {
+	public $template = "_layout/inspinia";
 
 	public function action_index()
 	{
