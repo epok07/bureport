@@ -11,7 +11,7 @@ class Create_categories
 			'company_id' => array('constraint' => 11, 'type' => 'int'),
 			'title' => array('constraint' => 255, 'type' => 'varchar'),
 			'type' => array('constraint' => 255, 'type' => 'varchar'),
-			'color' => array('constraint' => 10, 'type' => 'varchar'),
+			'color' => array('constraint' => 10, 'type' => 'varchar', 'null' => true),
 			'enabled' => array('constraint' => 1, 'type' => 'tinyint'),
 
 		), array('id'));
