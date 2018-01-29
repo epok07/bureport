@@ -10,6 +10,7 @@ require COREPATH.'bootstrap.php';
 	//'Observer_Request' => APPPATH .'classes/observer/request.php',
 	'Orm\\Observer_Message' => APPPATH .'classes/observer/message.php',
 	'Orm\\Observer_Chat' => APPPATH .'classes/observer/chat.php',
+	'Orm\\Observer_Loading' => APPPATH .'classes/observer/loading.php',
 
 
     //    'Orm\\Observer_Account' => APPPATH .'classes/observer/account.php',

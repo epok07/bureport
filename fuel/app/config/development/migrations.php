@@ -23,6 +23,9 @@ return array (
         14 => '015_create_machineries',
         15 => '016_create_silos',
         16 => '017_create_companies',
+        17 => '018_create_operations',
+        18 => '019_create_items_loadings',
+        19 => '020_add_silo_id_to_operations',
       ),
     ),
     'module' => 

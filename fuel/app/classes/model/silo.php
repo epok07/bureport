@@ -14,6 +14,49 @@ class Model_Silo extends Model
 		'enabled',
 	);
 
+	protected static $_has_many = array(
+
+ 			"loadings" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Loading',
+		        'key_to' => 'silo_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),
+
+		    "deliveries" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Operation',
+		        'key_to' => 'silo_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		        'conditions' => array(
+		           // 'order_by' => array(
+		           //      'posts_users.status' => 'ASC'	// define custom through table ordering
+		           //  ),
+		        	'where' => array(
+		        		array('type' => 1)
+		        		),
+		        ),
+		    ),
+
+		    "productions" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Operation',
+		        'key_to' => 'silo_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		        'conditions' => array(
+		           // 'order_by' => array(
+		           //      'posts_users.status' => 'ASC'	// define custom through table ordering
+		           //  ),
+		        	'where' => array(
+		        		array('type' => 0)
+		        		),
+		        ),
+		    ),
+ 	);
+
 
 	public static function validate($factory)
 	{
@@ -28,5 +71,30 @@ class Model_Silo extends Model
 
 		return $val;
 	}
+
+
+	public static function get_current_capacity($silo_id)
+	{
+		if(is_null($silo_id))  return null;
+
+		$silo = \Model_Silo::find($silo_id, array(
+                    'related' => array(
+                        'loadings'=> array(
+                            'where' => array(
+                                array('silo_id' => $silo_id),
+                                array('canceled' => 0 ),
+                                //array('deleted_at' => null )
+                                ) 
+                            )
+                        )
+                
+            ));
+        $loads = $silo->loadings ;
+         $volume = 0;
+        foreach ($loads as $key => $load) {
+            $volume +=  $load->weight;
+        }
+        return $volume;
+    }
 
 }

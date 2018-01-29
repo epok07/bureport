@@ -12,6 +12,27 @@ class Model_Category extends Model
 		'enabled',
 	);
 
+	protected static $_has_many = array(
+		"items" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Item',
+		        'key_to' => 'category_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),
+		  
+	);
+
+	protected static $_conditions = array(
+        'order_by' => array('title' => 'asc'),
+         'where' => array(
+        //    array('publish_date', '>', 1370721177),
+            array('enabled', '=', 1),
+         ),
+    );
+
+
+
 
 	public static function validate($factory)
 	{
@@ -19,7 +40,7 @@ class Model_Category extends Model
 		$val->add_field('company_id', 'Company Id', 'required|valid_string[numeric]');
 		$val->add_field('title', 'Title', 'required|max_length[255]');
 		$val->add_field('type', 'Type', 'required|max_length[255]');
-		$val->add_field('color', 'Color', 'required|max_length[10]');
+		//, 'null' => true$val->add_field('color', 'Color', 'required|max_length[10]');
 		$val->add_field('enabled', 'Enabled', 'required');
 
 		return $val;

@@ -11,6 +11,38 @@ class Model_Machinery extends Model
 		'enabled',
 	);
 
+	protected static $_belongs_to = array(
+		/*"category" => array(
+		        'key_from' => 'category_id',
+		        'model_to' => 'Model_Category',
+		        'key_to' => 'id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),*/
+		"company",	
+		"site" , 
+	);
+
+	protected static $_has_many = array(
+
+ 			"loadings" => array(
+		        'key_from' => 'id',
+		        'model_to' => 'Model_Loading',
+		        'key_to' => 'machenery_id',
+		        'cascade_save' => true,
+		        'cascade_delete' => false,
+		    ),
+ 	);
+
+
+	protected static $_conditions = array(
+        'order_by' => array('title' => 'asc'),
+         'where' => array(
+        //    array('publish_date', '>', 1370721177),
+            array('enabled', '=', 1),
+         ),
+    );
+
 
 	public static function validate($factory)
 	{

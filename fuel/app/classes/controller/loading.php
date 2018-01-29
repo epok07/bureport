@@ -28,6 +28,11 @@ class Controller_Loading extends Controller_Admin
 
 	public function action_create()
 	{
+		$volume = Model_Silo::get_current_capacity(1);
+		$_test_silo = Model_Silo::find(1);
+		
+        Session::set_flash('success', 'Capacity := '.  $volume . " " . $_test_silo->capacity);
+
 		if (Input::method() == 'POST')
 		{
 			$val = Model_Loading::validate('create');
@@ -47,9 +52,21 @@ class Controller_Loading extends Controller_Admin
 					'site_id' => Input::post('site_id'),
 					'canceled' => Input::post('canceled'),
 				));
-
+				$loading->items[$loading->item_id] = Model_Item::find($loading->item_id);
+				// Check before save if capacity is not full
+				//die(Session::get('exceeded'));
+				$_test_silo = Model_Silo::find($loading->silo_id);
+				if( $volume + $loading->weight > $_test_silo->capacity ){
+					   
+					   Session::set_flash('error', 'Could not save loading. <br> Capacity exceeded !'.Session::get('exceedent') ."t");
+					   Response::redirect('loading/create');
+				}
 				if ($loading and $loading->save())
 				{
+					 
+					// both main and related object already exist
+					
+
 					Session::set_flash('success', 'Added loading #'.$loading->id.'.');
 
 					Response::redirect('loading');
