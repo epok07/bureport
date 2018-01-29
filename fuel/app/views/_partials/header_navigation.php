@@ -30,12 +30,13 @@ $dt->setlocale('fr');
                 <li>
                     <span class="m-r-sm text-muted welcome-message"> <?php //Welcome to INSPINIA+ Admin Theme. ?> </span>
                 </li>
+                 <?php if(isset($data_payload['messages']) ): ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope"></i>  <span class="label label-warning"> <?= count($data_payload['messages']); ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
-                    <?php if($data_payload['messages']): ?>
+                    
                 
                         <?php foreach ($data_payload['messages'] as $index => $item): ?>
                              
@@ -56,7 +57,7 @@ $dt->setlocale('fr');
                              <li class="divider"></li>
                              
                         <?php endforeach; ?>
-                    <?php endif; ?>
+                    
                         
                         <!-- <li class="divider"></li>
                         <li>
@@ -94,6 +95,7 @@ $dt->setlocale('fr');
                         </li> -->
                     </ul>
                 </li>
+                <?php endif; ?>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>

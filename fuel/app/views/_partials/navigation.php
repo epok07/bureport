@@ -2,6 +2,7 @@
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
+                    <?php if(isset($current_employee) AND !empty($current_employee)) : ?>
                     <div class="dropdown profile-element"> <span>
                             <?= Model_Employee::get_avatar($current_employee->id, 64); ?>
 
@@ -23,8 +24,9 @@
                                 </li>
                         </ul>
                     </div>
+                    <?php endif; ?> 
                     <div class="logo-element">
-                        IN+
+                        PR+
                     </div>
                 </li>
                 

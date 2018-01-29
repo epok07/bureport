@@ -13,7 +13,7 @@ class Controller_Common extends Controller_Template
 
 	public $current_user;
 	
-	public $data_payload;
+	public $data_payload = null;
 
 	public $directories = array();
 	 
@@ -84,6 +84,11 @@ class Controller_Common extends Controller_Template
 						],
 						'limit'=> 5
 					]);
+		}else{
+			$this->data_payload['chats'] = array();
+			$this->data_payload['messages'] = array();
+			$this->data_payload['todos'] = array();
+
 		}
 		
 
@@ -97,19 +102,29 @@ class Controller_Common extends Controller_Template
  
 		$endpoints = $this->findFiles('../fuel/app/classes/controller', ['php'], ['admin']);
 
-		$temp_nav_uri = array();
+		$temp_nav_uri = array(
+			array(
+			'title' => ucfirst("dasboard"),
+				'url'	=> 'dashboard',
+				'attrs' => '',
+				'icon' => 'fa-th-large',
+				'order' => 0,
+
+				'submenu' => []
+				)
+			);
 		$iconset = array(
+			//'fa-th-large', 
 			'fa-bell-o',
 			'fa-bullhorn',
 			'fa-comments',
-			'fa-th-large', 
 			'fa-envelope',
 			 'fa-feed',
-			'fa-gears', 
 			//'fa-bar-chart-o', 
 			//'fa-flag-checkered'
 			'fa-industry',
 			'fa-check', 
+			'fa-gears', 
 			'fa-users', 
 			'fa-mail', 
 			'fa-star', 
@@ -118,16 +133,28 @@ class Controller_Common extends Controller_Template
 			);
 
 		foreach ($endpoints['php'] as $key => $nav_uri) {
+			 
 			$_curent_uri = str_replace('.php', '', $nav_uri);
 			$temp_nav_uri[] = array(
 				'title' => ucfirst($_curent_uri),
 				'url'	=> $_curent_uri,
 				'attrs' => '',
 				'icon' => $iconset[$key],
+				'order' => $key + 1,
 				'submenu' => []
 					);
-		}
- 
+		};
+
+		$temp_nav_uri[] = array(
+			'title' => ucfirst("settings"),
+				'url'	=> 'settings',
+				'attrs' => '',
+				'icon' => 'fa-gears',
+				'order' => 100,
+				'submenu' => []
+				);
+
+ 		$temp_nav_uri = Arr::sort($temp_nav_uri, 'order');
 		
 		// navigation
 		$nav = array(
@@ -250,6 +277,8 @@ class Controller_Common extends Controller_Template
 			            		AND !preg_match('/jobtitle/', $file)
 			            		AND !preg_match('/inspinia/', $file)
 			            		AND !preg_match('/api/', $file)
+			            		AND !preg_match('/dashboard/', $file)
+			            		AND !preg_match('/settings/', $file)
 			            		) {
 			            	//Debug::dump($file); die();
 

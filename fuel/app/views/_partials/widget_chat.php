@@ -13,7 +13,7 @@ Carbon::setLocale('fr');
             Small chat
         </div>
         <div class="content">
-			<?php if($data_payload['chats']): ?>
+			<?php if(isset($data_payload['chats'])): ?>
 				<?php $count = 0; $current_author_id = 0; $pos = 0; $alter = ['left', 'right']; ?>
 				<?php foreach ($data_payload['chats'] as $index => $item): ?>
 					
@@ -46,7 +46,9 @@ Carbon::setLocale('fr');
 	<div id="small-chat">
 
         <span class="badge badge-warning pull-right">
+        	<?php if(isset($data_payload['chats'])): ?>
         	 <?= count($data_payload['chats']); //ToDo: count unseen chat messages ?>
+        	<?php endif; ?>
         </span>
         <a class="open-small-chat">
             <i class="fa fa-comments"></i>
