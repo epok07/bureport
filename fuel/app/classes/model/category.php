@@ -46,4 +46,24 @@ class Model_Category extends Model
 		return $val;
 	}
 
+	public static function get_dropdownlist($exclude = array() ){
+		$dlist = []; 
+		$empty= ['-' => "Please select ..."];
+		$dlist['-']= "Please select ..."; 
+		$entry = Model_Vendor::find('all', array(
+			array('select' => array( 'type','title')),
+			array('where' => array(
+					array('company_id' => 1)
+				)
+			)));
+		foreach ($entry as $key => $row) {
+				if(isset($exclude) && !in_array($row->id, $exclude)){
+
+					$dlist[$row->id] =  "$row->type - $row->title" ;
+				}
+			}
+		
+		return $dlist;
+	}
+
 }

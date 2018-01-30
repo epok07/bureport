@@ -31,7 +31,7 @@ class Controller_Loading extends Controller_Admin
 		$volume = Model_Silo::get_current_capacity(1);
 		$_test_silo = Model_Silo::find(1);
 		
-        Session::set_flash('success', 'Capacity := '.  $volume . " " . $_test_silo->capacity);
+        //Session::set_flash('success', 'Capacity := '.  $volume . " " . $_test_silo->capacity);
 
 		if (Input::method() == 'POST')
 		{
@@ -106,7 +106,7 @@ class Controller_Loading extends Controller_Admin
 		if ($val->run())
 		{
 			$loading->company_id = Input::post('company_id');
-			$loading->user_id = Input::post('user_id');
+			$loading->user_id = $this->current_user->id; //Input::post('user_id');
 			$loading->start_date = Input::post('start_date');
 			$loading->item_id = Input::post('item_id');
 			$loading->machenery_id = Input::post('machenery_id');

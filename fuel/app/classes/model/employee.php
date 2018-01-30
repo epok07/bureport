@@ -159,6 +159,4 @@ class Model_Employee extends \Orm\Model_Soft
 
 	}
 	
-
-
 }

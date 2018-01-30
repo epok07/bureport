@@ -84,8 +84,27 @@ class Model_Loading extends Model
 
 	public static function validate($factory)
 	{
-		$cur_capacity = Model_silo::get_current_capacity(\Input::post('silo_id'));
-		$silo = Model_silo::find(\Input::post('silo_id'));
+		// Get param form Request
+		$_request =  \Request::active();
+        $params_id = $_request->method_params[0];
+        $post_silo_id = \Input::post('silo_id');
+        if(isset($post_silo_id)){
+        	$cur_capacity = Model_silo::get_current_capacity(\Input::post('silo_id'));
+        }
+        else{
+        	$cur_capacity = Model_silo::get_current_capacity($params_id);
+        }
+
+		// $cur_capacity = Model_silo::get_current_capacity(\Input::post('silo_id')) ; 
+
+		if(isset($post_silo_id)){
+			$silo = Model_silo::find(\Input::post('silo_id')) ;
+		}
+		else{
+			$load = Model_loading::find( $params_id ) ;
+			$silo = Model_silo::find($load->silo->id);
+		}
+		
 		$vol_max = $silo->capacity - $cur_capacity;
 		//die($vol_max);
 		$val = Validation::forge($factory);

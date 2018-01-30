@@ -67,234 +67,234 @@ function newPopup(url) {
  
    
 
-(function(){
+    (function(){
 
-	 Pusher.logToConsole = true;
+    	 Pusher.logToConsole = true;
 
-    var pusher = new Pusher('3607fe1af3ddf0c619ad', {
-      cluster: 'eu',
-      encrypted: true
-    });
-      <?php 
-       
-        $taux_silo_1 = Model_Silo::get_current_capacity_rate(1) ;
-        $taux_silo_2 = Model_Silo::get_current_capacity_rate(2) ;
-      ?>
-    var datagauge = ['data', 95];
-    	data = {};
-    	data.data1 = <?=  $taux_silo_1 ;?> ;
-    	data.data2 =  <?=  $taux_silo_2 ;?>;
-    
+        var pusher = new Pusher('3607fe1af3ddf0c619ad', {
+          cluster: 'eu',
+          encrypted: true
+        });
+          <?php 
+           
+            $taux_silo_1 = Model_Silo::get_current_capacity_rate(1) ;
+            $taux_silo_2 = Model_Silo::get_current_capacity_rate(2) ;
+          ?>
+        var datagauge = ['data', 95];
+        	data = {};
+        	data.data1 = <?=  $taux_silo_1 ;?> ;
+        	data.data2 =  <?=  $taux_silo_2 ;?>;
+        
 
-    var channel = pusher.subscribe('lhcm-channel');
-    channel.bind('prodreport', function(data) {
-      
-      console.log('PushNotification',data.message + ' '+data.name);
-       var datagauge1 = ['data', data.data1] || <?=  $taux_silo_1 ;?>,
-           datagauge2 = ['data', data.data2] || <?=  $taux_silo_2 ;?>,
-           datapie1   = ['data1', data.data1] || ['data1', <?=  $taux_silo_1 ;?>],
-           datapie2   = ['data2', data.data2] || ['data2', <?=  $taux_silo_2 ;?>]
-           ;
-           	<?php  //$_mydata = $_POST['content_data']; ?>
+        var channel = pusher.subscribe('lhcm-channel');
+        channel.bind('prodreport', function(data) {
+          
+          console.log('PushNotification',data.message + ' '+data.name);
+           var datagauge1 = ['data', data.data1] || <?=  $taux_silo_1 ;?>,
+               datagauge2 = ['data', data.data2] || <?=  $taux_silo_2 ;?>,
+               datapie1   = ['data1', data.data1] || ['data1', <?=  $taux_silo_1 ;?>],
+               datapie2   = ['data2', data.data2] || ['data2', <?=  $taux_silo_2 ;?>]
+               ;
+               	<?php  //$_mydata = $_POST['content_data']; ?>
 
-		// Notice 
-		// Display a info toast, with a title
-          toastr.info('Data Push',"<p>  " + data.data1 + "</p><p>  " + data.data2 + "</p>");
+    		// Notice 
+    		// Display a info toast, with a title
+              toastr.info('Data Push',"<p>  " + data.data1 + "</p><p>  " + data.data2 + "</p>");
 
-           // toastr.success('Data Updated',"<p> <?php echo implode('</p><p>', e((array) Session::get_flash('info'))); ?>  	</p>"); 
+               // toastr.success('Data Updated',"<p> <?php echo implode('</p><p>', e((array) Session::get_flash('info'))); ?>  	</p>"); 
 
-       c3.generate({
-                bindto: '#gauge1',
-                data:{
-                    columns: [
-                        // ['data', 95]
-                        datagauge1
-                    ],
+           c3.generate({
+                    bindto: '#gauge1',
+                    data:{
+                        columns: [
+                            // ['data', 95]
+                            datagauge1
+                        ],
 
-                    type: 'gauge'
-                },
-                color:{
-                    pattern: ['#1ab394', '#BABABA']
-
-                }
-            });
-
-       c3.generate({
-                bindto: '#gauge2',
-                data:{
-                    columns: [
-                        //['data', 95]
-                        datagauge2
-                    ],
-
-                    type: 'gauge'
-                },
-                color:{
-                    pattern: ['#1ab394', '#BABABA']
-
-                }
-            });
-
-       c3.generate({
-                bindto: '#pie',
-                data:{
-                    columns: [
-                        datapie1,
-                        datapie2
-                    ],
-                    colors:{
-                        data1: '#1ab394',
-                        data2: '#BABABA'
+                        type: 'gauge'
                     },
-                    type : 'pie'
-                }
-            });
+                    color:{
+                        pattern: ['#1ab394', '#BABABA']
 
-      //alert(data.message);
-    });
-
-	$(document).ready(function () {
-
-            c3.generate({
-                bindto: '#lineChart',
-                data:{
-                    columns: [
-                        ['data1', 30, 200, 100, 400, 150, 250],
-                        ['data2', 50, 20, 10, 40, 15, 25]
-                    ],
-                    colors:{
-                        data1: '#1ab394',
-                        data2: '#BABABA'
                     }
-                }
-            });
+                });
 
-            c3.generate({
-                bindto: '#slineChart',
-                data:{
-                    columns: [
-                        ['data1', 30, 200, 100, 400, 150, 250],
-                        ['data2', 130, 100, 140, 200, 150, 50]
-                    ],
-                    colors:{
-                        data1: '#1ab394',
-                        data2: '#BABABA'
+           c3.generate({
+                    bindto: '#gauge2',
+                    data:{
+                        columns: [
+                            //['data', 95]
+                            datagauge2
+                        ],
+
+                        type: 'gauge'
                     },
-                    type: 'spline'
-                }
-            });
+                    color:{
+                        pattern: ['#1ab394', '#BABABA']
 
-            c3.generate({
-                bindto: '#scatter',
-                data:{
-                    xs:{
-                        data1: 'data1_x',
-                        data2: 'data2_x'
-                    },
-                    columns: [
-                        ["data1_x", 3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8],
-                        ["data2_x", 3.3, 2.7, 3.0, 2.9, 3.0, 3.0, 2.5, 2.9, 2.5, 3.6, 3.2, 2.7, 3.0, 2.5, 2.8, 3.2, 3.0, 3.8, 2.6, 2.2, 3.2, 2.8, 2.8, 2.7, 3.3, 3.2, 2.8, 3.0, 2.8, 3.0, 2.8, 3.8, 2.8, 2.8, 2.6, 3.0, 3.4, 3.1, 3.0, 3.1, 3.1, 3.1, 2.7, 3.2, 3.3, 3.0, 2.5, 3.0, 3.4, 3.0],
-                        ["data1", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
-                        ["data2", 2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8]
-                    ],
-                    colors:{
-                        data1: '#1ab394',
-                        data2: '#BABABA'
-                    },
-                    type: 'scatter'
-                }
-            });
+                    }
+                });
 
-            c3.generate({
-                bindto: '#stocked',
-                data:{
-                    columns: [
-                        ['data1', 30,200,100,400,150,250],
-                        ['data2', 50,20,10,40,15,25]
-                    ],
-                    colors:{
-                        data1: '#1ab394',
-                        data2: '#BABABA'
-                    },
-                    type: 'bar',
-                    groups: [
-                        ['data1', 'data2']
-                    ]
-                }
-            });
+           c3.generate({
+                    bindto: '#pie',
+                    data:{
+                        columns: [
+                            datapie1,
+                            datapie2
+                        ],
+                        colors:{
+                            data1: '#1ab394',
+                            data2: '#BABABA'
+                        },
+                        type : 'pie'
+                    }
+                });
 
-            c3.generate({
-                bindto: '#gauge1',
-                data:{
-                    columns: [
-                        ['data', <?=  $taux_silo_1 ;?>]
-                    ],
-
-                    type: 'gauge'
-                },
-                color:{
-                    pattern: ['#1ab394', '#BABABA']
-
-                }
-            });
-
-            c3.generate({
-                bindto: '#gauge2',
-                data:{
-                    columns: [
-                        ['data', <?=  $taux_silo_2 ;?>]
-                    ],
-
-                    type: 'gauge'
-                },
-                color:{
-                    pattern: ['#1ab394', '#BABABA']
-
-                }
-            });
-
-            c3.generate({
-                bindto: '#pie',
-                data:{
-                    columns: [
-                        ['data1', <?=  $taux_silo_1 ;?>],
-                        ['data2', <?=  $taux_silo_2 ;?>]
-                    ],
-                    colors:{
-                        data1: '#1ab394',
-                        data2: '#BABABA'
-                    },
-                    type : 'pie'
-                }
-            });
-
+          //alert(data.message);
         });
 
-// 
- var _demouri = $('#demourl').attr("href");
-    document.getElementById("demolink").addEventListener("click", openNewBackgroundTab, false);
+    	$(document).ready(function () {
 
-    var myActionBtn = $('#demourl');
+                c3.generate({
+                    bindto: '#lineChart',
+                    data:{
+                        columns: [
+                            ['data1', 30, 200, 100, 400, 150, 250],
+                            ['data2', 50, 20, 10, 40, 15, 25]
+                        ],
+                        colors:{
+                            data1: '#1ab394',
+                            data2: '#BABABA'
+                        }
+                    }
+                });
 
-    myActionBtn.on('click', function(evt){
-        evt.preventDefault();
+                c3.generate({
+                    bindto: '#slineChart',
+                    data:{
+                        columns: [
+                            ['data1', 30, 200, 100, 400, 150, 250],
+                            ['data2', 130, 100, 140, 200, 150, 50]
+                        ],
+                        colors:{
+                            data1: '#1ab394',
+                            data2: '#BABABA'
+                        },
+                        type: 'spline'
+                    }
+                });
+
+                c3.generate({
+                    bindto: '#scatter',
+                    data:{
+                        xs:{
+                            data1: 'data1_x',
+                            data2: 'data2_x'
+                        },
+                        columns: [
+                            ["data1_x", 3.2, 3.2, 3.1, 2.3, 2.8, 2.8, 3.3, 2.4, 2.9, 2.7, 2.0, 3.0, 2.2, 2.9, 2.9, 3.1, 3.0, 2.7, 2.2, 2.5, 3.2, 2.8, 2.5, 2.8, 2.9, 3.0, 2.8, 3.0, 2.9, 2.6, 2.4, 2.4, 2.7, 2.7, 3.0, 3.4, 3.1, 2.3, 3.0, 2.5, 2.6, 3.0, 2.6, 2.3, 2.7, 3.0, 2.9, 2.9, 2.5, 2.8],
+                            ["data2_x", 3.3, 2.7, 3.0, 2.9, 3.0, 3.0, 2.5, 2.9, 2.5, 3.6, 3.2, 2.7, 3.0, 2.5, 2.8, 3.2, 3.0, 3.8, 2.6, 2.2, 3.2, 2.8, 2.8, 2.7, 3.3, 3.2, 2.8, 3.0, 2.8, 3.0, 2.8, 3.8, 2.8, 2.8, 2.6, 3.0, 3.4, 3.1, 3.0, 3.1, 3.1, 3.1, 2.7, 3.2, 3.3, 3.0, 2.5, 3.0, 3.4, 3.0],
+                            ["data1", 1.4, 1.5, 1.5, 1.3, 1.5, 1.3, 1.6, 1.0, 1.3, 1.4, 1.0, 1.5, 1.0, 1.4, 1.3, 1.4, 1.5, 1.0, 1.5, 1.1, 1.8, 1.3, 1.5, 1.2, 1.3, 1.4, 1.4, 1.7, 1.5, 1.0, 1.1, 1.0, 1.2, 1.6, 1.5, 1.6, 1.5, 1.3, 1.3, 1.3, 1.2, 1.4, 1.2, 1.0, 1.3, 1.2, 1.3, 1.3, 1.1, 1.3],
+                            ["data2", 2.5, 1.9, 2.1, 1.8, 2.2, 2.1, 1.7, 1.8, 1.8, 2.5, 2.0, 1.9, 2.1, 2.0, 2.4, 2.3, 1.8, 2.2, 2.3, 1.5, 2.3, 2.0, 2.0, 1.8, 2.1, 1.8, 1.8, 1.8, 2.1, 1.6, 1.9, 2.0, 2.2, 1.5, 1.4, 2.3, 2.4, 1.8, 1.8, 2.1, 2.4, 2.3, 1.9, 2.3, 2.5, 2.3, 1.9, 2.0, 2.3, 1.8]
+                        ],
+                        colors:{
+                            data1: '#1ab394',
+                            data2: '#BABABA'
+                        },
+                        type: 'scatter'
+                    }
+                });
+
+                c3.generate({
+                    bindto: '#stocked',
+                    data:{
+                        columns: [
+                            ['data1', 30,200,100,400,150,250],
+                            ['data2', 50,20,10,40,15,25]
+                        ],
+                        colors:{
+                            data1: '#1ab394',
+                            data2: '#BABABA'
+                        },
+                        type: 'bar',
+                        groups: [
+                            ['data1', 'data2']
+                        ]
+                    }
+                });
+
+                c3.generate({
+                    bindto: '#gauge1',
+                    data:{
+                        columns: [
+                            ['data', <?=  $taux_silo_1 ;?>]
+                        ],
+
+                        type: 'gauge'
+                    },
+                    color:{
+                        pattern: ['#1ab394', '#BABABA']
+
+                    }
+                });
+
+                c3.generate({
+                    bindto: '#gauge2',
+                    data:{
+                        columns: [
+                            ['data', <?=  $taux_silo_2 ;?>]
+                        ],
+
+                        type: 'gauge'
+                    },
+                    color:{
+                        pattern: ['#1ab394', '#BABABA']
+
+                    }
+                });
+
+                c3.generate({
+                    bindto: '#pie',
+                    data:{
+                        columns: [
+                            ['data1', <?=  $taux_silo_1 ;?>],
+                            ['data2', <?=  $taux_silo_2 ;?>]
+                        ],
+                        colors:{
+                            data1: '#1ab394',
+                            data2: '#BABABA'
+                        },
+                        type : 'pie'
+                    }
+                });
+
+            });
+
+    // 
+     var _demouri = $('#demourl').attr("href");
+        document.getElementById("demolink").addEventListener("click", openNewBackgroundTab, false);
+
+        var myActionBtn = $('#demourl');
+
+        myActionBtn.on('click', function(evt){
+            evt.preventDefault();
+            evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
+        });
+
+
+    function openNewBackgroundTab(){
+        var a = document.createElement("a");
+        a.href = _demouri;
+        var evt = document.createEvent("MouseEvents");    
         evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
-    });
+        a.dispatchEvent(evt);
+    }
+     
+
+     
 
 
-function openNewBackgroundTab(){
-    var a = document.createElement("a");
-    a.href = _demouri;
-    var evt = document.createEvent("MouseEvents");    
-    evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, true, false, false, false, 0, null);
-    a.dispatchEvent(evt);
-}
- 
-
- 
-
-
-})();
+    })();
 
         
     </script>
