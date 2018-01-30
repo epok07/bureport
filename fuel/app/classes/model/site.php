@@ -71,4 +71,24 @@ class Model_Site extends Model
 		return $val;
 	}
 
+	public static function get_dropdownlist($exclude = array() ){
+		$dlist = []; 
+		$empty= ['-' => "Please select ..."];
+		$dlist['-']= "Please select ..."; 
+		$entry = Model_Site::find('all', array(
+			array('select' => array( 'title')),
+			array('where' => array(
+					array('company_id' => 1)
+				)
+			)));
+		foreach ($entry as $key => $row) {
+				if(isset($exclude) && !in_array($row->id, $exclude)){
+
+					$dlist[$row->id] =  "$row->title" ;
+				}
+			}
+		
+		return $dlist;
+	}
+
 }

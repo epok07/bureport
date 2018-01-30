@@ -42,4 +42,19 @@ class Model_Jobtitle extends Model
 		return $val;
 	}
 
+	public static function get_dropdownlist($exclude = array() ){
+		$dlist = []; 
+		$empty= ['-' => "Please select ..."];
+		$dlist['-']= "Please select ..."; 
+		$entry = Model_Jobtitle::find('all', array('array(select)' => array( 'title')));
+		foreach ($entry as $key => $row) {
+				if(isset($exclude) && !in_array($row->id, $exclude)){
+
+					$dlist[$row->id] =  "$row->title" ;
+				}
+			}
+		
+		return $dlist;
+	}
+
 }
