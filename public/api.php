@@ -2083,15 +2083,17 @@ class PHP_API_AUTH {
 
 // uncomment the lines below for token+session based authentication (see "login_token.html" + "login_token.php"):
 
-/*$auth = PHP_API_AUTH(array(
-	'secret'=>'someVeryLongPassPhraseChangeMe',
-));
-$auth->executeCommand();
-if (empty($_SESSION['user'])) exit(403);*/
+// $auth =  new PHP_API_AUTH(array(
+// 	//'secret'=>'someVeryLongPassPhraseChangeMe',
+// 	'auth-token' => 'WV4YaeV8QeWVVVOE',
+// 	'token' => 'WV4YaeV8QeWVVVOE'
+// ));
+// $auth->executeCommand();
+// if (empty($_SESSION['user'])) exit(403); 
 
 // uncomment the lines below for form+session based authentication (see "login.html"):
 
-// $auth = PHP_API_AUTH(array(
+// $auth = new  PHP_API_AUTH(array(
 // 	'authenticator'=>function($user,$pass){ $_SESSION['user']=($user=='admin' && $pass=='admin'); }
 // ));
 // $auth->executeCommand();

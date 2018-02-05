@@ -43,7 +43,7 @@ return array(
 	 */
 	// 'index_file' => false,
 
-	'profiling'  => true,
+	'profiling'  => false,
 
 	/**
 	 * Default location for the file cache
@@ -184,6 +184,7 @@ return array(
 			'Closure',
 			'Pusher\\Pusher',
 			'Carbon\\Carbon',
+			'Fuel\\Core\\Request_Curl',
 		),
 	),
 
