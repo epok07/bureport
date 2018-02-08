@@ -17,8 +17,9 @@ class Controller_Apiv1 extends Controller_Rest
 {
 	public $format = 'json';
 
-	public function action_index()
+	public function action_index($entity='')
 	{
+		//$entity = $entity ?? "";
 		 /*$api = new PHP_CRUD_API(array(
 			'dbengine'=>'MySQL',
 			'hostname'=>'localhost',
@@ -31,7 +32,7 @@ class Controller_Apiv1 extends Controller_Rest
 		//return $this->response( json_encode([])  ) ;
 
 		// create a Request_Curl object
-		$curl = Request::forge(Uri::base().'/api.php/todos', 'curl');
+		$curl = Request::forge(Uri::base().'/api.php/' . $entity, 'curl');
 		//$curl = Request::forge('http://localhost/LHprodreport/public/api.php/todos', 'curl');
 		// pass an authentication token to the backend server
 		$curl->set_header('auth-token', 'WV4YaeV8QeWVVVOE');

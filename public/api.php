@@ -2105,7 +2105,7 @@ $api = new PHP_CRUD_API(array(
 	'dbengine'=>'MySQL',
 	'hostname'=>'localhost',
 	'username'=>'root',
-	'password'=>'',
+	'password'=>'mysql',
 	'database'=>'lhbureportdb',
 	'charset'=>'utf8'
 ));

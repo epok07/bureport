@@ -9,6 +9,8 @@ return array(
 	'_404_'   => 'inspinia/404',    // The main 404 route
 	//'_500_'   => 'inspinia/500',    // The main 500 route
 
+
+
 	
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
 
@@ -17,6 +19,8 @@ return array(
 	//'chat/delete(/:id)?' => array('chat/delete', 'id' => 0),
 
 	'message/view(/:id)?' => array('message/view', 'id' => 0),
+
+	'apiv1(/:entity)?' => array('apiv1/index.json', 'entity' => 'todos'),
 
 
 	
