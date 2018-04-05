@@ -20,7 +20,7 @@ return array(
 
 	'message/view(/:id)?' => array('message/view', 'id' => 0),
 
-	'apiv1(/:entity)?' => array('apiv1/index.json', 'entity' => 'todos'),
+	'apiv1(/:entity)?' => array('apiv1/index', 'entity' => 'todos'),
 
 
 	
